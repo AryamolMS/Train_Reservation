@@ -1,0 +1,14 @@
+.bookingcard{
+    width: 1500px;
+    height: 500px;
+    background-color: white;
+}
+.maindiv{
+    width: 100%;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+.table{
+    width: 1500px;
+    border-color: black;
+}
