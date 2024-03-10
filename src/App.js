@@ -7,6 +7,10 @@ import Home from './common/Home/Home';
 import AdminHome from './Admin/AdminHome';
 import MyBookings from './User/Bookings/MyBookings';
 import UserHome from './User/UserHome/UserHome'
+import UserList from './Admin/UserList';
+import AddTrain from './Admin/AddTrain';
+import Station from './Admin/Station';
+import Search from './User/Search/Search';
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
         <Route path='/adminhome' element={<AdminHome/>}/>
         <Route path='/userhome' element={<UserHome/>}/>
         <Route path='/userbookings' element={<MyBookings/>}/>
+        <Route path='/userlist' element={<UserList/>}/>
+        <Route path='/addtrain' element={<AddTrain/>}/>
+        <Route path='/station' element={<Station/>}/>
+        <Route path='/search' element={<Search/>}/>
 
       </Routes>
     </div>

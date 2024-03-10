@@ -1,10 +1,116 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Authentication.css'
 import { Col, Container, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import { loginaApi, registrationapi } from '../../services/allAPI';
 
 function Authentication({login}) {
+  
+
   const loginForm = login?true:false
+  const navigate = useNavigate()
+
+  const [data,setdata] = useState({
+    name:"",
+    age:"",
+    email_address:"",
+    biodata:"",
+    username:"",
+    password:""
+  })
+
+
+  //function to register
+  const handleRegister = async(e)=>{
+    e.preventDefault()
+
+    const {name,age,email_address,biodata,username,password} = data
+
+    if(!name || !age || !email_address || !biodata || !username || !password){
+      alert("Please fill this form")
+    }
+    else{
+
+      const reqBody = new FormData()
+
+      reqBody.append("name",name)
+      reqBody.append("age",age)
+      reqBody.append("email_address",email_address)
+      reqBody.append("biodata",biodata)
+      reqBody.append("username",username)
+      reqBody.append("password",password)
+
+      const reqHeader ={
+        "Content-Type":"multipart/form-data"
+      }
+
+      const result = await registrationapi(reqBody,reqHeader)
+      console.log(result);
+      if(result.status === 200){
+        console.log(result.data);
+        alert("Registered Successfully")
+        setdata({
+          name: "",
+          age: "",
+          email_address: "",
+          biodata: "",
+          username: "",
+          password: ""
+        })
+        navigate('/login')
+      }
+      else{
+        console.log(result.response.data);
+        alert("Something went wrong")
+      }
+    }
+  }
+  console.log(data);
+
+  //function to login
+  const handleLogin = async(e)=>{
+    e.preventDefault()
+
+    const {username,password} = data
+
+    if(!username || !password){
+      alert("Please fill this form")
+    }
+    else{    
+      const result = await loginaApi(data)
+      console.log(result);
+
+      if(result.status === 200){
+        if(username === "user1" && password === "admin@123"){
+          alert('Login Successfull')
+          sessionStorage.setItem("token",result.data.token)
+
+        setdata({
+          username:"",
+          password:""
+        })
+        setTimeout(()=>{
+          navigate('/adminhome')
+        },2000)
+        }
+        else{
+          alert('Login Successfull')
+
+          sessionStorage.setItem("token",result.data.token)
+          setdata({
+            username:"",
+            password:""
+          })
+          navigate('/userhome')
+        }
+      }
+    else{
+      alert(result.response.data)
+    }
+    }
+    }
+
   return (
     <>
      <Container>
@@ -26,38 +132,38 @@ function Authentication({login}) {
               null
                 :
                 <div className='mb-5 mt-5 me-4'>
-                <input type="text" placeholder='Enter Username' className='form-control w-75'/>
+                <input value={data.name} onChange={(e)=>setdata({...data,name:e.target.value})} type="text" placeholder='Enter name' className='form-control w-75'/>
               </div>}
-              {loginForm?null
-              :
-              <div className='mb-5 d-flex'>
-                <input type="text" placeholder='Enter Phn no' className='form-control w-75' />
-              </div>}
-
+            
               {loginForm?null
               :<div className='mb-4 d-flex'>
-              <label htmlFor="" className='mt-1'>DOB</label>
-                  <input type="date" name="" id=""  className='ms-2'/>
-              <input type="file" name="" id=""  className='ms-3'/>
+                <input value={data.age} onChange={(e)=>setdata({...data,age:e.target.value})} type="number" name="" id="" placeholder='Enter Age' className='form-control w-50'/>
+              <input onChange={(e)=>setdata({...data,biodata:e.target.files[0]})}  type="file" name="" id=""  className='ms-3'/>
               </div>}
-              {loginForm?null
+             
+              { loginForm?null
               :
-              <div className='mb-5'>
-                  <textarea name="" id="" cols="50" rows="3" placeholder='Address '></textarea>
-              </div>}
-
               <div className='mb-5 me-4'>
-                <input type="email" placeholder='Enter email' className='form-control w-75'/>
-              </div>
+                <input value={data.email_address} onChange={(e)=>setdata({...data,email_address:e.target.value})} type="email" placeholder='Enter email' className='form-control w-75'/>
+              </div>}
               <div className='mb-3 me-4'>
-                <input type="password" placeholder='Enter password' className='form-control w-75'/>
+             
+                <div className='mb-5 mt-5 me-4'>
+                <input value={data.username} onChange={(e)=>setdata({...data,username:e.target.value})} type="text" placeholder='Enter username' className='form-control w-75'/>
               </div>
+              </div>
+           
+                <div>
+                  <input value={data.password} onChange={(e)=>setdata({...data,password:e.target.value})} type="password" placeholder='Enter password' className='form-control w-75'/>
+             
+                </div>
+            
              { loginForm?
               <div className='mt-5 fw-5'>
-              <Link to={'/userhome'} style={{textDecoration:'none'}}><button className='btn btn-success form-control w-75 mb-2'>Login</button></Link>
+              <Link to={'/userhome'} style={{textDecoration:'none'}}><button className='btn btn-success form-control w-75 mb-2' onClick={handleLogin}>Login</button></Link>
             </div>:
               <div className='mt-5 fw-5'>
-                <button className='btn btn-success form-control w-50 mb-2'>Register</button>
+                <button className='btn btn-success form-control w-50 mb-2' onClick={handleRegister}>Register</button>
               </div>}
               { loginForm?
                 <div>
@@ -73,6 +179,7 @@ function Authentication({login}) {
       <Col md={2}>
       </Col>
     </Container> 
+    <ToastContainer theme='colored' position='top-center' autoClose={2000}/>
     </>
   )
 }

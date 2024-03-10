@@ -38,7 +38,7 @@ function Home({home}) {
 
             </select>
             <input type="date" name="" id=""  className='me-4'/>
-            <button className='btn btn-danger w-25'>Search</button>
+            <Link to={'/search'}><button className='btn btn-danger w-100'>Search</button></Link>
 
         </div>
       </div>
