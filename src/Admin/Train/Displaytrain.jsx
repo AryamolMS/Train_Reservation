@@ -2,9 +2,17 @@ import React, { useEffect, useState } from 'react'
 import AdminHeader from '../../common/Headers/AdminHeader'
 import './displaytrain.css'
 import { displaytrainsApi } from '../../services/allAPI'
+import { EditFilled } from '@ant-design/icons'
+import Modal from 'react-bootstrap/Modal';
+
 
 function Displaytrain() {
     const [userbooking,setuserbooking] = useState([])
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => {setShow(false)};
+    const handleShow = () => setShow(true);
+  
 
     const gettrains = async()=>{
     
@@ -42,6 +50,7 @@ function Displaytrain() {
               <th>Amount Ac</th>
               <th>Amount nonac</th>
               <th>Amount sleeper</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +65,7 @@ function Displaytrain() {
                 <td>{item.amount_nonac}</td>
                 <td>{item.amount_ac}</td>
                 <td>{item.amount_sleeper}</td>
+                <td><EditFilled className='text-success' onClick={handleShow}/></td>
               </tr>))
             
             :<p>nothing to display</p>}
@@ -64,6 +74,45 @@ function Displaytrain() {
       </div>
         </div>
       </div>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Update Train Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <div className='mb-3 '>
+            <input type="text"  placeholder='train_name' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="number"  placeholder='train_number' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="text"  placeholder='source' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="text"  placeholder='destination' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="date"  placeholder='departure_time' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="date"  placeholder='arrival_time' className='form-control' />
+        </div>
+        <div className='mb-3 '>
+            <input type="number"  placeholder='amount_ac' className='form-control' />
+        </div><div className='mb-3 '>
+            <input type="number"  placeholder='amount_nonac' className='form-control' />
+        </div><div className='mb-3 '>
+            <input type="number"  placeholder='amount_sleeper' className='form-control' />
+        </div>
+        </Modal.Body>
+       
+      </Modal>
     </>
   )
 }
