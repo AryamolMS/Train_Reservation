@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { loginaApi, registrationapi } from '../../services/allAPI';
 
 function Authentication({login}) {
-  
 
   const loginForm = login?true:false
   const navigate = useNavigate()
@@ -106,7 +105,7 @@ function Authentication({login}) {
         }
       }
     else{
-      alert(result.response.data)
+      console.log(result.response.data)
     }
     }
     }

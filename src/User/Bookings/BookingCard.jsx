@@ -5,7 +5,7 @@ function BookingCard() {
   return (
     <>
      <div className='bookingcard rounded'>
-        <table className='table table-bordered text-center rounded'>
+        <table className='table1 table-bordered text-center rounded'>
             <thead>
                 <tr>
                     <th>#</th>

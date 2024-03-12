@@ -11,6 +11,8 @@ import UserList from './Admin/UserList';
 import AddTrain from './Admin/AddTrain';
 import Station from './Admin/Station';
 import Search from './User/Search/Search';
+import StationLogin from './Admin/StationLogin';
+import Displaytrain from './Admin/Train/Displaytrain';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path='/addtrain' element={<AddTrain/>}/>
         <Route path='/station' element={<Station/>}/>
         <Route path='/search' element={<Search/>}/>
+        <Route path='/stationlogin' element={<StationLogin/>}/>
+        <Route path='/displaytrain' element={<Displaytrain/>}/>
 
       </Routes>
     </div>

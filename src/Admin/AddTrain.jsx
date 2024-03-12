@@ -25,6 +25,20 @@ function AddTrain() {
 
   console.log(traindetails);
 
+  const handleClose1 = ()=>{
+    setTraindetails({
+      train_name:"",
+      train_number:"",
+      source:"",
+      destination:"",
+      departure_time:"",
+      arrival_time:"",
+      amount_ac:"",
+      amount_nonac:"",
+      amount_sleeper:""
+    })
+  }
+
   const handleSubmit = async()=>{
 
     const {train_name,train_number,source,destination,departure_time,arrival_time,amount_ac,amount_nonac,amount_sleeper} = traindetails
@@ -33,13 +47,34 @@ function AddTrain() {
       alert("Fill the details completely")
     }
     else{
-      const result =  await trainregistrationApi(traindetails)
+      
+      const reqBody = new FormData()
+
+      reqBody.append("train_name",train_name)
+      reqBody.append("train_number",train_number)
+      reqBody.append("source",source)
+      reqBody.append("destination",destination)
+      reqBody.append("departure_time",departure_time)
+      reqBody.append("arrival_time",arrival_time)
+      reqBody.append("amount_ac",amount_ac)
+      reqBody.append("amount_nonac",amount_nonac)
+      reqBody.append("amount_sleeper",amount_sleeper)
+
+      const token = sessionStorage.getItem("token")
+
+      //reqHeader
+      const reqHeader = {
+        "Content-Type":"application/json",
+        'Authorization':`Token ${token}`
+      }
+      const result =  await trainregistrationApi(reqBody,reqHeader)
       console.log(result);
       if(result.status === 200){
         alert("Registration successfull")
+        
       }
       else{
-        
+        alert(result.response.data)
       }
     }
   }
@@ -82,10 +117,10 @@ function AddTrain() {
             <input type="text"  placeholder='destination' className='form-control' value={traindetails.destination} onChange={(e)=>setTraindetails({...traindetails,destination:e.target.value})}/>
         </div>
         <div className='mb-3 '>
-            <input type="time"  placeholder='departure_time' className='form-control' value={traindetails.departure_time} onChange={(e)=>setTraindetails({...traindetails,departure_time:e.target.value})}/>
+            <input type="date"  placeholder='departure_time' className='form-control' value={traindetails.departure_time} onChange={(e)=>setTraindetails({...traindetails,departure_time:e.target.value})}/>
         </div>
         <div className='mb-3 '>
-            <input type="time"  placeholder='arrival_time' className='form-control' value={traindetails.arrival_time} onChange={(e)=>setTraindetails({...traindetails,arrival_time:e.target.value})}/>
+            <input type="date"  placeholder='arrival_time' className='form-control' value={traindetails.arrival_time} onChange={(e)=>setTraindetails({...traindetails,arrival_time:e.target.value})}/>
         </div>
         <div className='mb-3 '>
             <input type="number"  placeholder='amount_ac' className='form-control' value={traindetails.amount_ac} onChange={(e)=>setTraindetails({...traindetails,amount_ac:e.target.value})}/>
@@ -96,7 +131,7 @@ function AddTrain() {
         </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" className='bg-danger text-white me-3' onClick={handleClose}>
+          <Button variant="secondary" className='bg-danger text-white me-3' onClick={handleClose1}>
             Cancel
           </Button>
           <Button variant="primary" className='bg-success text-white' onClick={handleSubmit}>Add</Button>

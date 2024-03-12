@@ -17,7 +17,17 @@ export const stationregistrationApi = async(reqBody)=>{
    return await commonAPI(`POST`,`${baseurl}/station/register/`,reqBody,"")
 } 
 
+//station login
+export const stationloginaApi = async(reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/station/token/`,reqBody,"")
+}
+
 //train registration
 export const trainregistrationApi = async(reqBody,reqHeader)=>{
    return await commonAPI(`POST`,`${baseurl}/station/train/`,reqBody,reqHeader)
 } 
+
+//display train details
+export const displaytrainsApi = async(reqHeader)=>{
+   return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
+ }
