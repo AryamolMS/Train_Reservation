@@ -31,3 +31,8 @@ export const trainregistrationApi = async(reqBody,reqHeader)=>{
 export const displaytrainsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
  }
+
+ //display train details
+export const bookingsApi = async(reqHeader)=>{
+   return  await commonAPI('GET',`${baseurl}/customer/bookinghistory/`,"",reqHeader)
+ }

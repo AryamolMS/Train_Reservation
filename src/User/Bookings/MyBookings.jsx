@@ -9,7 +9,11 @@ function MyBookings() {
     <div className='maindiv'> <br /><br /><br />
     <h1 className='text-center mb-3 text-warning'>BOOKING DETAILS</h1>
        <div className='d-flex align-items-center justify-content-center'>
-        <BookingCard/>
+        
+          
+          <BookingCard/>
+    
+        
       </div> 
     </div>
     </>

@@ -7,7 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 
 
 function Displaytrain() {
-    const [userbooking,setuserbooking] = useState([])
+
+    const [trainlist,settrainlist] = useState([])
 
     const [show, setShow] = useState(false);
     const handleClose = () => {setShow(false)};
@@ -25,7 +26,7 @@ function Displaytrain() {
        
         const result = await displaytrainsApi(reqHeader)
         console.log(result);
-        setuserbooking(result.data)
+        settrainlist(result.data)
       }
     }
       useEffect(()=>{
@@ -37,6 +38,11 @@ function Displaytrain() {
         <AdminHeader/>
         <div className='p-2'>
             <h1 className='text-center text-warning'>Train Details</h1>
+
+            <div className='d-flex'>
+              <input type="text" placeholder='Train name' className='form-control mb-3 w-75 ms-5'/>
+              <i class="fa-solid fa-magnifying-glass fa-2x ms-3"></i>
+            </div>
         <div className='rounded'>
         <table className='table2 table-bordered text-center rounded'>
           <thead>
@@ -54,8 +60,8 @@ function Displaytrain() {
             </tr>
           </thead>
           <tbody>
-            {userbooking?.length>0?
-            userbooking.map((item)=>(<tr>
+            {trainlist?.length>0?
+            trainlist.map((item)=>(<tr>
                 <td>{item.train_name}</td>
                 <td>{item.train_number}</td>
                 <td>{item.source}</td>
