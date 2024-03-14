@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AdminHeader from '../../common/Headers/AdminHeader'
 import './displaytrain.css'
-import { displaytrainsApi } from '../../services/allAPI'
-import { EditFilled } from '@ant-design/icons'
-import Modal from 'react-bootstrap/Modal';
+import { displaytrainsApi} from '../../services/allAPI'
+import EdittrainDetails from './EdittrainDetails'
+import { edittrainContext } from '../../context/ContextShare'
 
 
 function Displaytrain() {
-    const [userbooking,setuserbooking] = useState([])
+  const {edittrain,setedittrain} = useContext(edittrainContext)
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => {setShow(false)};
-    const handleShow = () => setShow(true);
+
+    const [trainlist,settrainlist] = useState([])
+
   
 
     const gettrains = async()=>{
@@ -25,18 +25,30 @@ function Displaytrain() {
        
         const result = await displaytrainsApi(reqHeader)
         console.log(result);
-        setuserbooking(result.data)
+        settrainlist(result.data)
       }
     }
+
+    const handleSearch = ()=>{
+      
+    }
+
       useEffect(()=>{
         gettrains()
-      },[])
+      },[edittrain])
+      
+     
   return (
     <>
       <div className='d-flex'>
         <AdminHeader/>
         <div className='p-2'>
             <h1 className='text-center text-warning'>Train Details</h1>
+
+            <div className='d-flex'>
+              <input type="text" placeholder='Train name' className='form-control mb-3 w-75 ms-5'/>
+              <i class="fa-solid fa-magnifying-glass fa-2x ms-3" onClick={handleSearch}></i>
+            </div>
         <div className='rounded'>
         <table className='table2 table-bordered text-center rounded'>
           <thead>
@@ -54,8 +66,8 @@ function Displaytrain() {
             </tr>
           </thead>
           <tbody>
-            {userbooking?.length>0?
-            userbooking.map((item)=>(<tr>
+            {trainlist?.length>0?
+            trainlist.map((item)=>(<tr>
                 <td>{item.train_name}</td>
                 <td>{item.train_number}</td>
                 <td>{item.source}</td>
@@ -65,7 +77,7 @@ function Displaytrain() {
                 <td>{item.amount_nonac}</td>
                 <td>{item.amount_ac}</td>
                 <td>{item.amount_sleeper}</td>
-                <td><EditFilled className='text-success' onClick={handleShow}/></td>
+                <td><EdittrainDetails train={item}/></td>
               </tr>))
             
             :<p>nothing to display</p>}
@@ -75,44 +87,7 @@ function Displaytrain() {
         </div>
       </div>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Update Train Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <div className='mb-3 '>
-            <input type="text"  placeholder='train_name' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="number"  placeholder='train_number' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="text"  placeholder='source' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="text"  placeholder='destination' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="date"  placeholder='departure_time' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="date"  placeholder='arrival_time' className='form-control' />
-        </div>
-        <div className='mb-3 '>
-            <input type="number"  placeholder='amount_ac' className='form-control' />
-        </div><div className='mb-3 '>
-            <input type="number"  placeholder='amount_nonac' className='form-control' />
-        </div><div className='mb-3 '>
-            <input type="number"  placeholder='amount_sleeper' className='form-control' />
-        </div>
-        </Modal.Body>
-       
-      </Modal>
+     
     </>
   )
 }

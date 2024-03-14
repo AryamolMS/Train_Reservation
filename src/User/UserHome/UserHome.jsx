@@ -6,7 +6,6 @@ function UserHome() {
   return (
     <>
     <Home/>
-    <Footer/>
     </>
   )
 }

@@ -13,11 +13,17 @@ import Station from './Admin/Station';
 import Search from './User/Search/Search';
 import StationLogin from './Admin/StationLogin';
 import Displaytrain from './Admin/Train/Displaytrain';
+<<<<<<< HEAD
 import BookNow from './User/Bookings/BookNow';
 import Check from './User/Search/Check';
 import Booked from './User/Search/Booked';
+=======
+import Trainsearch from './User/Search/Trainsearch';
+import Footer from './common/Footer/Footer';
+>>>>>>> c4064247b8b041175c61891cea5a9a1c57d5001f
 
 function App() {
+  
   return (
     <div className="App">
       <Routes>
@@ -35,14 +41,21 @@ function App() {
         <Route path='/search' element={<Search/>}/>
         <Route path='/stationlogin' element={<StationLogin/>}/>
         <Route path='/displaytrain' element={<Displaytrain/>}/>
+<<<<<<< HEAD
         <Route path='/booknow' element={<BookNow/>}/>
         <Route path='/check' element={<Check/>}/>
         <Route path='/booked' element={<Booked/>}/>
 
 
      
+=======
+        <Route path='/trainsearch' element={<Trainsearch/>}/>
+>>>>>>> c4064247b8b041175c61891cea5a9a1c57d5001f
       </Routes>
+      <Footer/>
+
     </div>
+    
   );
 }
 
