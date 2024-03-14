@@ -39,7 +39,7 @@ function Footer() {
                 </Col>
                 <Col md={4}>
                     <h4 className='mb-5 mt-4'>Get In Touch</h4>
-                  <div className='d-flex'>  <input type="email" name="" id="" placeholder='Enter email' style={{height:'50px'}} className='me-1'/><Button variant="contained">Contained</Button></div>
+                  <div className='d-flex'>  <input type="email" name="" id="" placeholder='Enter email' style={{height:'50px'}} className='me-1'/><Button variant="contained">Submit</Button></div>
                   <p>We are the best</p>
                 </Col>
                 <p className='mt-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum expedita provident exercitationem! Dolores magni, </p>

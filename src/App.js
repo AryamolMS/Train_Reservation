@@ -18,9 +18,11 @@ import Check from './User/Search/Check';
 import Booked from './User/Search/Booked';
 import Trainsearch from './User/Search/Trainsearch';
 import Footer from './common/Footer/Footer';
+import { useContext } from 'react';
+import { isAuthtokenContext } from './context/ContextShare';
 
 function App() {
-  
+  const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
   return (
     <div className="App">
       <Routes>
@@ -29,8 +31,8 @@ function App() {
         <Route path='/register' element={<Authentication/>}/>
         <Route path='/adminheader' element={<AdminHeader/>}/>
         <Route path='/userheader' element={<UserHeader/>}/>
-        <Route path='/adminhome' element={<AdminHome/>}/>
-        <Route path='/userhome' element={<UserHome/>}/>
+        <Route path='/adminhome' element={isAuthtken?<AdminHome/>:<Home/>}/>
+        <Route path='/userhome' element={isAuthtken?<UserHome/>:<Home/>}/>
         <Route path='/userbookings' element={<MyBookings/>}/>
         <Route path='/userlist' element={<UserList/>}/>
         <Route path='/addtrain' element={<AddTrain/>}/>
