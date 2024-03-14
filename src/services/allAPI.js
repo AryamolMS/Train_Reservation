@@ -36,3 +36,13 @@ export const displaytrainsApi = async(reqHeader)=>{
 export const bookingsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/bookinghistory/`,"",reqHeader)
  }
+
+//search train details
+/* export const searchApi = async(reqHeader)=>{
+   return  await commonAPI('GET',`${baseurl}/station/train/${id}/`,"",reqHeader)
+ } */
+
+ //update train details
+export const edittrainApi = async(trainId,reqBody,reqHeader)=>{
+   return  await commonAPI('PUT',`${baseurl}/station/train/${trainId}/`,reqBody,reqHeader)
+ }

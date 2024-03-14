@@ -1,15 +1,18 @@
 import React, { Children, createContext, useState } from 'react'
 
 export const isAuthtokenContext = createContext()
+export const edittrainContext = createContext()
 
-function ContextShare() {
+function ContextShare({children}) {
 
     const [isAuthtken,setIsAuthtoken] = useState(true)
-
+    const [edittrain,setedittrain] = useState({})
   return (
     <>
     <isAuthtokenContext.Provider value={{isAuthtken,setIsAuthtoken}}>
-      {Children}
+      <edittrainContext.Provider value={{edittrain,setedittrain}}>
+      {children}
+      </edittrainContext.Provider>
     </isAuthtokenContext.Provider>
     </>
   )

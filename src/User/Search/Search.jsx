@@ -51,7 +51,7 @@ function Search() {
                   13:05 | NAGPUR | Fri, 01 Dec
                 </div>
               </div>
-              <button className="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">Check Availability</button>
+              <Link style={{textDecoration:'none',color:'white'}} to={'/trainsearch'}><button className="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">Check Availability</button></Link>
             </div>
           </div>
         </div>

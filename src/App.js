@@ -13,8 +13,11 @@ import Station from './Admin/Station';
 import Search from './User/Search/Search';
 import StationLogin from './Admin/StationLogin';
 import Displaytrain from './Admin/Train/Displaytrain';
+import Trainsearch from './User/Search/Trainsearch';
+import Footer from './common/Footer/Footer';
 
 function App() {
+  
   return (
     <div className="App">
       <Routes>
@@ -32,9 +35,12 @@ function App() {
         <Route path='/search' element={<Search/>}/>
         <Route path='/stationlogin' element={<StationLogin/>}/>
         <Route path='/displaytrain' element={<Displaytrain/>}/>
-
+        <Route path='/trainsearch' element={<Trainsearch/>}/>
       </Routes>
+      <Footer/>
+
     </div>
+    
   );
 }
 
