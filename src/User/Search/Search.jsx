@@ -50,6 +50,9 @@ function Search() {
                 <div className="col-5 text-end">
                   13:05 | NAGPUR | Fri, 01 Dec
                 </div>
+
+
+                
               </div>
               <button className="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">Check Availability</button>
             </div>
@@ -57,6 +60,9 @@ function Search() {
         </div>
       </div>
     </div>
+
+
+    
    
    
     </>

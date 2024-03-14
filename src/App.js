@@ -13,6 +13,9 @@ import Station from './Admin/Station';
 import Search from './User/Search/Search';
 import StationLogin from './Admin/StationLogin';
 import Displaytrain from './Admin/Train/Displaytrain';
+import BookNow from './User/Bookings/BookNow';
+import Check from './User/Search/Check';
+import Booked from './User/Search/Booked';
 
 function App() {
   return (
@@ -32,7 +35,12 @@ function App() {
         <Route path='/search' element={<Search/>}/>
         <Route path='/stationlogin' element={<StationLogin/>}/>
         <Route path='/displaytrain' element={<Displaytrain/>}/>
+        <Route path='/booknow' element={<BookNow/>}/>
+        <Route path='/check' element={<Check/>}/>
+        <Route path='/booked' element={<Booked/>}/>
 
+
+     
       </Routes>
     </div>
   );

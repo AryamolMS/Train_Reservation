@@ -11,6 +11,8 @@ function UserHeader({login}) {
   const handleClose = () => {setShow(false)};
   const handleShow = () => setShow(true);
 
+  
+
   const loginForm = login?true:false
 
   return (
@@ -33,17 +35,17 @@ function UserHeader({login}) {
           <Modal.Title>Update Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <label htmlFor='profile'>
+        {/* <label htmlFor='profile'>
                   <input className='mt-3 mb-4' id='profile' type="file" style={{ marginLeft: '100px', display: 'none' }} />
                  <img  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="no image" style={{height:'200px',width:'200px',marginLeft: '130px',borderRadius:'50%'}} />
-                </label>
+                </label> */}
                 <input style={{borderRadius:'10px',border:'1px solid black'}} type="text" placeholder='Enter name' className='form-control mt-4 w-75 ms-5'/> <br />
-  
-              <input style={{borderRadius:'10px',border:'1px solid black'}} type="email" placeholder='Enter email' className='form-control w-75 ms-5'/> <br />
-
+                  <input style={{borderRadius:'10px',border:'1px solid black'}} type="age" placeholder='Enter age' className='form-control mt-4 w-75 ms-5'/> <br />
+                  <input style={{borderRadius:'10px',border:'1px solid black'}} type="file" placeholder='choose file' className='form-control mt-4 w-75 ms-5'/> <br />
+              <input style={{borderRadius:'10px',border:'1px solid black'}} type="email" placeholder='Enter username' className='form-control w-75 ms-5'/> <br />
               <input style={{borderRadius:'10px',border:'1px solid black'}} type="password" placeholder='Enter password' className='form-control w-75 ms-5' /> <br />
 
-              <button className='btn btn-success w-50' style={{marginLeft:'100px'}}>Update</button>
+              <button className='btn btn-primary w-50' style={{marginLeft:'100px'}}>Update</button>
         </Modal.Body>
        
       </Modal>
