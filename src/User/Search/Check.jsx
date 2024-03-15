@@ -25,7 +25,7 @@ function Check() {
                     </select>
                 </div>
                 <div className='mt-5 ms-5'>
-                    <button className='btn btn-danger ms-3 w-60' style={{fontSize:'20px',fontWeight:'lighter'}} >check</button>
+                    <button className='btn btn-danger ms-3 w-60' style={{fontSize:'20px',fontWeight:'lighter'}} >Check</button>
                 </div>
             </form>
         </div>

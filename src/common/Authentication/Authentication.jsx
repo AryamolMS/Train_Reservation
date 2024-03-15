@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { loginaApi, registrationapi } from '../../services/allAPI';
+import Swal from 'sweetalert2';
 
 function Authentication({login}) {
 
@@ -27,7 +28,13 @@ function Authentication({login}) {
     const {name,age,email_address,biodata,username,password} = data
 
     if(!name || !age || !email_address || !biodata || !username || !password){
-      alert("Please fill this form")
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please fill the form",
+        showConfirmButton: false,
+        timer: 1700
+      }); 
     }
     else{
 
@@ -48,7 +55,13 @@ function Authentication({login}) {
       console.log(result);
       if(result.status === 200){
         console.log(result.data);
-        alert("Registered Successfully")
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Registered Successfully",
+          showConfirmButton: false,
+          timer: 1700
+        }); 
         setdata({
           name: "",
           age: "",
@@ -61,7 +74,13 @@ function Authentication({login}) {
       }
       else{
         console.log(result.response.data);
-        alert("Something went wrong")
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: "Something went wrong",
+          showConfirmButton: false,
+          timer: 1700
+        }); 
       }
     }
   }
@@ -74,7 +93,13 @@ function Authentication({login}) {
     const {username,password} = data
 
     if(!username || !password){
-      alert("Please fill this form")
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please fill the form",
+        showConfirmButton: false,
+        timer: 1700
+      }); 
     }
     else{    
       const result = await loginaApi(data)
@@ -82,7 +107,13 @@ function Authentication({login}) {
 
       if(result.status === 200){
         if(username === "user1" && password === "admin@123"){
-          alert('Login Successfull')
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Login Successfully",
+            showConfirmButton: false,
+            timer: 1700
+          }); 
           sessionStorage.setItem("token",result.data.token)
 
         setdata({
@@ -94,7 +125,13 @@ function Authentication({login}) {
         },2000)
         }
         else{
-          alert('Login Successfull')
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Login Successfully",
+            showConfirmButton: false,
+            timer: 1500
+          }); 
 
           sessionStorage.setItem("token",result.data.token)
           setdata({

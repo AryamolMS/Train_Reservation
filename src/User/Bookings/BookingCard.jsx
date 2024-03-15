@@ -47,7 +47,8 @@ function BookingCard() {
               </Col>
             ))
           ) : (
-            <h1>No Bookings</h1>
+            <h1></h1>
+
           )}
         </Row>
       </Container>
