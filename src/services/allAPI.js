@@ -60,7 +60,7 @@ export const searchApi = async(reqHeader)=>{
  //update train details
 export const edittrainApi = async(trainId,reqBody,reqHeader)=>{
    return  await commonAPI('PUT',`${baseurl}/station/train/${trainId}/`,reqBody,reqHeader)
- }
+}
 
 //trainlist
 export const listtrainApi = async(reqHeader)=>{

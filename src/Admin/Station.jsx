@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { stationregistrationApi } from '../services/allAPI';
+import Swal from 'sweetalert2';
 
 function Station() {
     const [show, setShow] = useState(false);
@@ -25,13 +26,25 @@ function Station() {
     const {name,station_code,Location,phone_number,username,password} = details    
 
     if(!name || !station_code || !Location || !phone_number || !username || !password){
-        alert("Please fill this form")
+       Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please fill the form",
+        showConfirmButton: false,
+        timer: 1700
+      }); 
     }
     else{
        const result = await stationregistrationApi(details)
        console.log(result);
        if(result.status === 200){
-        alert("Station added successfully")
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Station added Successfully",
+          showConfirmButton: false,
+          timer: 1700
+        }); 
         setDetails({
             name: "",
             station_code: "",

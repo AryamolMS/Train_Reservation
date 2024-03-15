@@ -53,6 +53,7 @@ function UserHeader({login}) {
               <input style={{borderRadius:'10px',border:'1px solid black'}} type="email" placeholder='Enter username' className='form-control w-75 ms-5'/> <br />
               <input style={{borderRadius:'10px',border:'1px solid black'}} type="password" placeholder='Enter password' className='form-control w-75 ms-5' /> <br />
               <button className='btn btn-primary w-50' style={{marginLeft:'100px'}}>Update</button>
+              
         </Modal.Body>
        
       </Modal>

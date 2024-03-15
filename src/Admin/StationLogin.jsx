@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AdminHeader from '../common/Headers/AdminHeader'
 import { stationloginaApi } from '../services/allAPI';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function StationLogin() {
 
@@ -18,14 +19,26 @@ function StationLogin() {
         const {username,password} = stationdata
 
         if(!username || !password){
-            alert("Please fill this form")
+            Swal.fire({
+                position: "top-center",
+                icon: "warning",
+                title: "Please fill the form",
+                showConfirmButton: false,
+                timer: 1700
+              }); 
         }
         else{
             const result = await stationloginaApi(stationdata)
             console.log(result);
 
             if(result.status === 200){
-                alert("Login successfull")
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "Login Successfully",
+                    showConfirmButton: false,
+                    timer: 1700
+                  }); 
                 navigate('/addtrain')
                 sessionStorage.setItem("token",result.data.token)
             }
