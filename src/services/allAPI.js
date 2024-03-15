@@ -46,6 +46,7 @@ export const displaytrainsApi = async(reqHeader)=>{
  export const bookedApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
  }
+
  //display train details
 export const bookingsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/bookinghistory/`,"",reqHeader)

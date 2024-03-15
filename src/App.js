@@ -20,6 +20,7 @@ import Trainsearch from './User/Search/Trainsearch';
 import Footer from './common/Footer/Footer';
 import { useContext } from 'react';
 import { isAuthtokenContext } from './context/ContextShare';
+import Feedback from './User/Feedback/Feedback';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -43,9 +44,7 @@ function App() {
         <Route path='/booknow' element={<BookNow/>}/>
         <Route path='/check' element={<Check/>}/>
         <Route path='/booked' element={<Booked/>}/>
-
-
-     
+        <Route path='/feedback' element={<Feedback/>}/>
         <Route path='/trainsearch' element={<Trainsearch/>}/>
       </Routes>
       <Footer/>

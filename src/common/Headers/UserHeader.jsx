@@ -30,6 +30,7 @@ function UserHeader({login}) {
     <>
      <div className='userheader d-flex  text-light'>
        <div className='ms-auto me-3 p-2 d-flex m-2'>
+       <Link to={'/feedback'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Feedback</p></Link>
         <p className='me-4' onClick={handleShow}>Profile</p>
         <Link to={'/userbookings'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>My Bookings</p></Link>        
         <p onClick={logeout}>LogOut</p>
