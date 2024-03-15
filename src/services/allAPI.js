@@ -43,7 +43,6 @@ export const displaytrainsApi = async(reqHeader)=>{
  }
 
  //booked
-
  export const bookedApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
  }
@@ -53,11 +52,16 @@ export const bookingsApi = async(reqHeader)=>{
  }
 
 //search train details
-/* export const searchApi = async(reqHeader)=>{
-   return  await commonAPI('GET',`${baseurl}/station/train/${id}/`,"",reqHeader)
- } */
+export const searchApi = async(reqHeader)=>{
+   return  await commonAPI('GET',`${baseurl}/station/train/`,"",reqHeader)
+ }
 
  //update train details
 export const edittrainApi = async(trainId,reqBody,reqHeader)=>{
    return  await commonAPI('PUT',`${baseurl}/station/train/${trainId}/`,reqBody,reqHeader)
 }
+
+//trainlist
+export const listtrainApi = async(reqHeader)=>{
+   return  await commonAPI('GET',`${baseurl}/station/train/`,"",reqHeader)
+ } 

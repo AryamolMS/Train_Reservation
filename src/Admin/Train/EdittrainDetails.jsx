@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { EditFilled } from '@ant-design/icons'
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
@@ -77,6 +77,9 @@ function EdittrainDetails({train}) {
         }
       }
   
+      useEffect(()=>{
+
+      },[datePart,datetime])
   
   return (
     <>
