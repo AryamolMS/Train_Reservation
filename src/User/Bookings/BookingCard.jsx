@@ -2,6 +2,7 @@ import React from 'react';
 import './bookingcard.css'; 
 import { Col, Container, Row } from 'react-bootstrap';
 import Feedback from '../Feedback/Feedback';
+import CancelBooking from './CancelBooking';
 
 function BookingCard({ bookings }) {
   const formatDate = (datetimeString) => {
@@ -24,6 +25,7 @@ function BookingCard({ bookings }) {
               <h6>Reserved seat : {bookings.reserved_seats}</h6>
               <h6>Reservation date : {formatDate(bookings.reservation_date)}</h6>
               <h6>Booking status : {bookings.booking_status}</h6>
+              <CancelBooking/>
               <Feedback/>
             </div>
           </Col>

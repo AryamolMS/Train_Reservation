@@ -83,3 +83,8 @@ export const seatlimitApi = async (trainId, reqBody, reqHeader) => {
 export const displayseatsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/station/traincapacity/`,"",reqHeader)
  }
+
+ // search train
+ export const searchTrainApi = async(reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/search_train/`,reqBody,"")
+}
