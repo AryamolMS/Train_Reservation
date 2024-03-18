@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminHeader from '../common/Headers/AdminHeader'
+import AdminHeader from '../../common/Headers/AdminHeader'
 import './adminhome.css'
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';

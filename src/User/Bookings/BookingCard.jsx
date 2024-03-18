@@ -1,7 +1,7 @@
-import React from 'react'; // Import React
-import './bookingcard.css'; // Import CSS file
-import { Col, Container, Row } from 'react-bootstrap'; // Import Col, Container, and Row from react-bootstrap
-import { Button } from '@mui/material'; // Import Button from Material-UI
+import React from 'react'; 
+import './bookingcard.css'; 
+import { Col, Container, Row } from 'react-bootstrap';
+import Feedback from '../Feedback/Feedback';
 
 function BookingCard({ bookings }) {
   const formatDate = (datetimeString) => {
@@ -15,7 +15,7 @@ function BookingCard({ bookings }) {
       <Container>
         <Row>
           <Col lg={4} className="mt-4 p-4">
-            <div className="Card shadowcp-3" style={{ width: "300px" }}>
+            <div className="Card shadow p-5 text-center rounded" style={{ width: "400px" }}>
               <h6>Username : {bookings.user}</h6>
               <h6>Train number : {bookings.train_number}</h6>
               <h6>Booking Amount : {bookings.booking_amount}</h6>
@@ -24,9 +24,7 @@ function BookingCard({ bookings }) {
               <h6>Reserved seat : {bookings.reserved_seats}</h6>
               <h6>Reservation date : {formatDate(bookings.reservation_date)}</h6>
               <h6>Booking status : {bookings.booking_status}</h6>
-              <Button className="mt-3 ms-5" variant="contained">
-                Cancel
-              </Button>
+              <Feedback/>
             </div>
           </Col>
         </Row>

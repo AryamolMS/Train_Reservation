@@ -5,6 +5,7 @@ import offerImage from '../../images/offer.png'
 import offerImage2 from '../../images/offer2.png'
 import UserHeader from '../Headers/UserHeader'
 import { Container } from 'react-bootstrap'
+import Header from '../Headers/Header'
 
 function Home({home}) {
   const commonhome = home?true:false
@@ -12,9 +13,7 @@ function Home({home}) {
     <>
      <div className='home'>
      {commonhome?
-      <div className='header p-2'>
-        <Link to={'/login'} style={{textDecoration:'none',fontWeight:'600',fontSize:'20px',marginLeft:'1400px'}}><button className='btn text-danger'>Login</button></Link>
-     </div>
+      <Header/>
      :
      <UserHeader/>}
       <div className='homecard Card shadow d-flex  justify-content-center mb-5'>

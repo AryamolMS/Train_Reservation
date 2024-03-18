@@ -1,9 +1,9 @@
 import React from 'react'
-import AdminHeader from '../common/Headers/AdminHeader'
+import AdminHeader from '../../common/Headers/AdminHeader'
 import { Button } from '@mui/material'
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
-import { trainregistrationApi } from '../services/allAPI';
+import { trainregistrationApi } from '../../services/allAPI';
 
 function AddTrain() {
     const [show, setShow] = useState(false);

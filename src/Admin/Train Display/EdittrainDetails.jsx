@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import {  edittrainApi } from '../../services/allAPI'
 import { edittrainContext } from '../../context/ContextShare';
+import AddSeats from '../Train & Seat add/AddSeats';
 
 
 function EdittrainDetails({train}) {
@@ -84,7 +85,7 @@ function EdittrainDetails({train}) {
   return (
     <>
 
-    <EditFilled className='text-success' onClick={handleShow}/>
+    <EditFilled className='text-success' onClick={handleShow}/> 
        <Modal
         show={show}
         onHide={handleClose}
@@ -126,7 +127,6 @@ function EdittrainDetails({train}) {
               <input type="submit" value="Update" className='ms-5 w-75 bg-success text-light' onClick={handleSubmit} />
         </div>
         </Modal.Body>
-       
       </Modal>
     </>
   )

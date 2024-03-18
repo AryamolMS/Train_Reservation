@@ -3,23 +3,32 @@ import UserHeader from "../../common/Headers/UserHeader";
 import { Link } from "react-router-dom";
 import { listtrainApi } from "../../services/allAPI";
 
-function Search() {
+function Search({login}) {
+  const loginForm = login?true:false
 
   const [trainlist,settrainlist] = useState([])
 
-  const gettrainlist = async()=>{
-    if(sessionStorage.getItem("token")){
-      const token = sessionStorage.getItem("token")
-      const reqHeader = {
-        'Authorization':`Token ${token}`
+  const gettrainlist = async () => {
+    try {
+      let result;
+      if (sessionStorage.getItem("token")) {
+        const token = sessionStorage.getItem("token");
+        const reqHeader = {
+          Authorization: `Token ${token}`,
+        };
+        result = await listtrainApi(reqHeader);
+      } else {
+        // If the user is not logged in, fetch train list without authorization
+        result = await listtrainApi();
       }
-   
-    const result = await listtrainApi(reqHeader)
-    console.log(result);
-    settrainlist(result.data)
-  }
-}
-
+      console.log(result);
+      settrainlist(result.data);
+    } catch (error) {
+      console.error("Error fetching train list:", error);
+      // Handle error here
+    }
+  };
+  
 useEffect(()=>{
   gettrainlist()
 },[])
@@ -32,7 +41,7 @@ const formatDate = (datetimeString) => {
 
   return (
     <>
-      <UserHeader />
+     {loginForm? <UserHeader /> :null}
       <div
         className="d-flex align-items-center justify-content-center mb-3 mt-3"
         style={{ height: "50px" }}
@@ -72,7 +81,7 @@ const formatDate = (datetimeString) => {
       {trainlist?.length > 0 ? (
   trainlist.map((item) => (
     <div className="container-fluid pt-2" key={item.train_id}>
-      <div className="row">
+      <div className="row ms-5">
         <div className="col-6 mt-2">
           <div className="card m">
             <div className="card-header bg-secondary text-white">
