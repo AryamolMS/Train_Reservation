@@ -10,7 +10,7 @@ function BookNow({ train_id, type }) {
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    getTrainData(git )
+    getTrainData()
   }
   console.log(train_id, type);
   const getTrainData = async () => {
