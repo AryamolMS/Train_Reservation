@@ -83,9 +83,15 @@ export const displayseatsApi = async(reqHeader)=>{
 }
 
 //check availability
-export const checkavailabilityApi = async(id,reqBody)=>{
-   return await commonAPI(`POST`,`${baseurl}/train/${id}/check_availability/`,reqBody,"")
+export const checkavailabilityApi = async(id,reqBody,reqHeader)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/check_availability/`,reqBody,reqHeader)
 }
+// add feedback api
 export const submitFeedbackApi = async (id,reqBody,reqHeader)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/add_feedback/`,reqBody,reqHeader)
+}
+
+//get single train API for customer
+export const getSingleTrainApi = async (id,reqHeader)=>{
+   return await commonAPI(`GET`,`${baseurl}/customer/train/${id}/`,"",reqHeader)
 }
