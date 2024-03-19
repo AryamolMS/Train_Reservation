@@ -10,7 +10,7 @@ function BookingCard({ bookings }) {
     const options = { weekday: 'short', day: '2-digit', month: 'short' };
     return dateObj.toLocaleDateString('en-US', options);
   };
-  
+  console.log(bookings);
   return (
     <>
       <Container>
@@ -26,7 +26,7 @@ function BookingCard({ bookings }) {
               <h6>Reservation date : {formatDate(bookings.reservation_date)}</h6>
               <h6>Booking status : {bookings.booking_status}</h6>
               <CancelBooking/>
-              <Feedback/>
+              <Feedback id={bookings?.train_number?.id}/>
             </div>
           </Col>
         </Row>
