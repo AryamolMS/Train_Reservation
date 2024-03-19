@@ -10,7 +10,7 @@ function BookingCard({ bookings }) {
     const options = { weekday: 'short', day: '2-digit', month: 'short' };
     return dateObj.toLocaleDateString('en-US', options);
   };
-  
+  console.log(bookings);
   return (
     <>
       <Container>
@@ -18,7 +18,7 @@ function BookingCard({ bookings }) {
           <Col lg={4} className="mt-4 p-4">
             <div className="Card shadow p-5 text-center rounded" style={{ width: "400px" }}>
               <h6>Username : {bookings.user}</h6>
-              <h6>Train number : {bookings.train_number}</h6>
+              <h6>Train number : {bookings.train_number.train_number}</h6>
               <h6>Booking Amount : {bookings.booking_amount}</h6>
               <h6>Booking Time : {bookings.booking_time.split('T')[1].slice(0, -11)} {formatDate(bookings.booking_time)}</h6>
               <h6>Seat type : {bookings.seat_type}</h6>
@@ -26,7 +26,7 @@ function BookingCard({ bookings }) {
               <h6>Reservation date : {formatDate(bookings.reservation_date)}</h6>
               <h6>Booking status : {bookings.booking_status}</h6>
               <CancelBooking/>
-              <Feedback/>
+              <Feedback id={bookings?.train_number?.id}/>
             </div>
           </Col>
         </Row>
