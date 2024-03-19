@@ -18,6 +18,7 @@ import Footer from './common/Footer/Footer';
 import { useContext } from 'react';
 import { isAuthtokenContext } from './context/ContextShare';
 import Feedback from './User/Feedback/Feedback';
+import Payment from './User/Bookings/Payment';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -40,6 +41,7 @@ function App() {
         <Route path='/booknow' element={<BookNow/>}/>
         <Route path='/check/:id' element={<Check/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
+        <Route path='/payment' element={<Payment/>}/>
       </Routes>
       <Footer/>
 
