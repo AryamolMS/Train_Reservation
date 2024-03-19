@@ -101,3 +101,13 @@ export const getSingleTrainApi = async (id,reqHeader)=>{
 export const getlivestatusApi = async (reqBody)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody)
 }
+//add payment api
+
+export const addPaymentAPI = async (id,reqHeader)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/bookinghistory/${id}/add_payment/`,"",reqHeader)
+}
+
+// book ticket
+export const bookTicketAPI = async (id,reqBody,reqHeader)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/book_ticket/`,reqBody,reqHeader)
+}

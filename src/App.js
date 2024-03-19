@@ -19,6 +19,7 @@ import { useContext } from 'react';
 import { isAuthtokenContext } from './context/ContextShare';
 import Feedback from './User/Feedback/Feedback';
 import Status from './User/TrainStatus/Status';
+import Payment from './User/Bookings/Payment';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -42,6 +43,7 @@ function App() {
         <Route path='/check/:id' element={<Check/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
         <Route path='/livestatus' element={<Status/>}/>
+        <Route path='/payment' element={<Payment/>}/>
       </Routes>
       <Footer/>
 
