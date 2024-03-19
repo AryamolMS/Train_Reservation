@@ -17,29 +17,31 @@ function Home({home}) {
      :
      <UserHeader/>}
       <div className='homecard Card shadow d-flex  justify-content-center mb-5'>
-        <div className='search Card shadow d-flex align-items-center justify-content-center'>
-            
-            <select name="" id="" className='w-25 me-2'>
-            <option value="">From</option>
-              <option value="">New Delhi</option>
-              <option value="">Kolkatha</option>
-              <option value="">Banglore</option>
-              <option value="">Ernakulam</option>
+      <div className="search d-flex align-items-center justify-content-center mb-3 mt-3" style={{ height: "100px", width: "80%" }}>
+  <Link to={'/search'} className="w-25 me-2">
+    <select name="" id="" style={{ width: "150px" }}>
+      <option value="">From</option>
+      <option value="">New Delhi</option>
+      <option value="">Kolkatha</option>
+      <option value="">Banglore</option>
+      <option value="">Ernakulam</option>
+    </select>
+  </Link>
 
-            </select>
-             
-            <select name="" id="" className='w-25  me-2'>
-            <option value="">To</option>
-              <option value="">Ernakulam</option>
-              <option value="">Banglore</option>
-              <option value="">Kolkatha</option>
-              <option value="">New Delhi</option>
+  <Link to={'/search'} className="w-25 me-2">
+    <select name="" id="" style={{ width: "150px" }}>
+      <option value="">To</option>
+      <option value="">Ernakulam</option>
+      <option value="">Banglore</option>
+      <option value="">Kolkatha</option>
+      <option value="">New Delhi</option>
+    </select>
+  </Link>
 
-            </select>
-            <input type="date" name="" id=""  className='me-4'/>
-            <Link to={'/search'}><button className='btn btn-danger w-100'>Search</button></Link>
+ <Link to={'/search'}> <input type="date" name="" id="" className="me-4" /></Link>
+</div>
 
-        </div>
+
       </div>
     </div> 
     <div className='text-center mt-4'>

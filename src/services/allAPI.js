@@ -95,3 +95,9 @@ export const submitFeedbackApi = async (id,reqBody,reqHeader)=>{
 export const getSingleTrainApi = async (id,reqHeader)=>{
    return await commonAPI(`GET`,`${baseurl}/customer/train/${id}/`,"",reqHeader)
 }
+
+//train status
+
+export const getlivestatusApi = async (reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody)
+}
