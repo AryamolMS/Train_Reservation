@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { checkavailabilityApi } from '../../services/allAPI';
 
 function Check() {
   const [selectedClass, setSelectedClass] = useState('');
@@ -7,12 +8,8 @@ function Check() {
 
   const handleCheckAvailability = async () => {
     try {
-      // Perform API call to check seat availability based on selectedClass and train number
-      const response = await fetch(`YOUR_API_ENDPOINT?trainNumber=YOUR_TRAIN_NUMBER&class=${selectedClass}`);
-      const data = await response.json();
-
-      // Update seatsAvailable state with the received data
-      setSeatsAvailable(data.seatsAvailable);
+      const result = await checkavailabilityApi()
+      console.log(result);
     } catch (error) {
       console.error('Error checking seat availability:', error);
     }

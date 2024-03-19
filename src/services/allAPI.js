@@ -64,20 +64,13 @@ export const edittrainApi = async(trainId,reqBody,reqHeader)=>{
 
 //trainlist
 export const listtrainApi = async(reqHeader)=>{
-   return  await commonAPI('GET',`${baseurl}/station/train/`,"",reqHeader)
+   return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
  } 
 
  // get user details
  export const getuserApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/profile/`,"",reqHeader)
  }
-
-
-/* //seat add
-export const seatlimitApi = async (trainId, reqBody, reqHeader) => {
-   return await commonAPI('POST', `${baseurl}/station/train/${trainId}/add_capacity/`, reqBody, reqHeader);
-}; */
-
 
 //get seat
 export const displayseatsApi = async(reqHeader)=>{
@@ -87,4 +80,9 @@ export const displayseatsApi = async(reqHeader)=>{
  // search train
  export const searchTrainApi = async(reqBody)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/search_train/`,reqBody,"")
+}
+
+//check availability
+export const checkavailabilityApi = async(id,reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/train/${id}/check_availability/`,reqBody,"")
 }

@@ -38,7 +38,7 @@ function App() {
         <Route path='/stationlogin' element={<StationLogin/>}/>
         <Route path='/displaytrain' element={<Displaytrain/>}/>
         <Route path='/booknow' element={<BookNow/>}/>
-        <Route path='/check' element={<Check/>}/>
+        <Route path='/check/:id' element={<Check/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
       </Routes>
       <Footer/>
