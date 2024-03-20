@@ -32,6 +32,7 @@ function UserHeader({login}) {
   const logeout = ()=>{
     sessionStorage.removeItem("token")
     sessionStorage.removeItem("userDetails")
+    sessionStorage.clear()
     setIsAuthtoken(false)
     navigate('/')
    
@@ -81,27 +82,24 @@ console.log(useredit)
   },[isUpdate])
  
   useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("userDetails"));
-    if (user) {
-      setUserprofile({
-        ...userProfile,
-        name: user.name || "",
-        age: user.age || "",
-        email_address: user.email_address || "",
-        username: user.username || "",
-        password: user.password || "",
-        biodata: ""
-      });
-      setExistinguser(user.biodata || "");
-    }
+    if(sessionStorage.getItem("userDetails")){
+      const user = JSON.parse(sessionStorage.getItem("userDetails"))
+      if (user) {
+        setUserprofile({
+          ...userProfile,
+          name: user.name || "",
+          age: user.age || "",
+          email_address: user.email_address || "",
+          username: user.username || "",
+          password: user.password || "",
+          biodata: ""
+        });
+        setExistinguser(user.biodata || "");
+      }
+      }
+
   }, []);
   console.log(userProfile);
-
-
-
-
-
-
 
   
  useEffect(()=>{
@@ -169,24 +167,6 @@ else{
     "Content-Type":"application/json",
     "Authorization":`Bearer ${token}`
   }
-
-  
-//   const result = await editProfileApi(reqBody,reqHeader)
-//   console.log(result);
-//   if(result.status===200){
-//     Swal.fire({
-//       position: "top-center",
-//       icon: "success",
-//       title: "Profile updated successfully",
-//       showConfirmButton: false,
-//       timer: 1700
-//     });
-//     sessionStorage.setItem("existingUser",JSON.stringify(result.data))
-//    setIsUpdate(true)
-//   }
-// else{
-//  console.log(result.response.data);
-// }
  }
  
  }
@@ -201,10 +181,11 @@ useEffect(()=>{
     <>
      <div className='userheader d-flex  text-light'>
        <div className='ms-auto me-3 p-2 d-flex m-2'>
-       <Link to={'/feedback'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Feedback</p></Link>
         <p className='me-4' onClick={handleShow}>Profile</p>
         <Link to={'/userbookings'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>My Bookings</p></Link>
         <Link to={'/livestatus'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Train status</p></Link>
+        <Link to={'/search'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Search</p></Link>
+        <Link to={'/refunds'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Refunds</p></Link>
 
                 
         <p onClick={logeout}>LogOut</p>

@@ -11,6 +11,7 @@ function AdminHeader() {
 
   const logeout = ()=>{
     sessionStorage.removeItem("token")
+    sessionStorage.clear()
     setIsAuthtoken(false)
     navigate('/')
    

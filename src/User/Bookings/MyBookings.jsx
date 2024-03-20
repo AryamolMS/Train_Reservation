@@ -35,7 +35,7 @@ function MyBookings() {
                 <BookingCard bookings={item} getbookings={getbookings} />
               </Col>
             )) :
-            <p>No bookings</p>
+            <p className='text-center'>No bookings</p>
           }
         </Row>
       </div>

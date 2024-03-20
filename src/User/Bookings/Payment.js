@@ -3,13 +3,14 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addPaymentAPI } from "../../services/allAPI";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Payment({ id, amount, closeBookNow }) {
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const navigate=useNavigate()
     const handlePayNow = async () => {
         let token = sessionStorage.getItem('token')
         if (!token) {

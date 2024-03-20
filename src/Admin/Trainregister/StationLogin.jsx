@@ -37,8 +37,9 @@ function StationLogin({register}) {
                     title: "Login Successfull!",
                     icon: "success"
                   });
+                  sessionStorage.setItem("token",result.data.token)
+
                 navigate('/adminhome')
-                sessionStorage.setItem("token",result.data.token)
             }
             else{
                 console.log(result.response.data);

@@ -32,7 +32,7 @@ function App() {
         <Route path='/register' element={<Authentication/>}/>
         <Route path='/adminheader' element={<AdminHeader/>}/>
         <Route path='/userheader' element={<UserHeader/>}/>
-        <Route path='/adminhome' element={isAuthtken?<AdminHome/>:<Home/>}/>
+        <Route path='/adminhome' element={<AdminHome/>}/>
         <Route path='/userhome' element={isAuthtken?<UserHome/>:<Home/>}/>
         <Route path='/userbookings' element={<MyBookings/>}/>
         <Route path='/addtrain' element={<AddTrain/>}/>

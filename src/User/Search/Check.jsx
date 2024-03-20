@@ -71,7 +71,6 @@ function Check() {
             <div className='mb-3 d-flex justify-content-center align-items-center flex-column h-100'>
               <h4 className='mb-4'>{seatsAvailable} Seats Available</h4>
               <BookNow train_id={id} type={selectedClass} totalSeats={seatsAvailable}/>
-              {/* <Link to={'/booknow'}><button className='btn btn-success'>Book</button></Link> */}
             </div>
           </div>
         </div>
