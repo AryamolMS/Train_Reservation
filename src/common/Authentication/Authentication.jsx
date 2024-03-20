@@ -291,11 +291,8 @@ function Authentication({ login }) {
 
     if (!username || !password) {
       Swal.fire({
-        position: "top-center",
-        icon: "warning",
-        title: "Please fill the form",
-        showConfirmButton: false,
-        timer: 1700
+        title: "Please fill the form!",
+        icon: "warning"
       });
     } else {
       const result = await loginaApi(data);
@@ -303,11 +300,8 @@ function Authentication({ login }) {
 
       if (result.status === 200) {
         Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Login Successfully",
-          showConfirmButton: false,
-          timer: 1500
+          title: "Login Successfull!",
+          icon: "success"
         });
         sessionStorage.setItem("token", result.data.token);
 

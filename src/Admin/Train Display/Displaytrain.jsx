@@ -3,16 +3,18 @@ import AdminHeader from "../../common/Headers/AdminHeader";
 import "./displaytrain.css";
 import { displayseatsApi, displaytrainsApi } from "../../services/allAPI";
 import EdittrainDetails from "./EdittrainDetails";
-import { edittrainContext } from "../../context/ContextShare";
+import { addseatContext, edittrainContext } from "../../context/ContextShare";
 import AddSeats from "../Train & Seat add/AddSeats";
 
 function Displaytrain() {
-
+const [seatUpdate,setSeatUpdate]=useState("")
   const token = sessionStorage.getItem("token");
   const reqHeader = {
     "Content-Type": "application/json",
     Authorization: `Token ${token}`,
   };
+
+  const {addseat,setSeatadd} = useContext(addseatContext)
 
   const { edittrain, setedittrain } = useContext(edittrainContext);
 
@@ -52,7 +54,11 @@ function Displaytrain() {
   useEffect(() => {
     gettrains();
     getseats()
-  }, [edittrain]);
+  }, [edittrain, seatUpdate]);
+
+  useEffect(()=>{
+
+  },[addseat])
 
   return (
     <>
@@ -112,7 +118,7 @@ function Displaytrain() {
                         <td>{item.amount_ac}</td>
                         <td>{item.amount_sleeper}</td>
                         <td>
-                          <EdittrainDetails train={item} />{" "}
+                          <EdittrainDetails train={item} setSeatUpdate={setSeatUpdate} />{" "}
                           <AddSeats train = {item.id}/>
                         </td>
                       </tr>

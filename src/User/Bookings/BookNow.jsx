@@ -3,9 +3,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { bookTicketAPI, getSingleTrainApi } from '../../services/allAPI';
-import { Link } from 'react-router-dom';
 import Payment from './Payment';
-// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Swal from 'sweetalert2';
 
 
 function BookNow({ train_id, type, totalSeats }) {
@@ -30,6 +29,7 @@ function BookNow({ train_id, type, totalSeats }) {
   console.log(ticketPrice);
   console.log(trainData);
   console.log(train_id, type);
+  
   const checkTicketPrice = () => {
     if (trainData) {
       if (type === 'AC') {
@@ -44,7 +44,10 @@ function BookNow({ train_id, type, totalSeats }) {
   const handleBookNow = async () => {
     let token = sessionStorage.getItem('token')
     if (!token) {
-      alert('Please login')
+      Swal.fire({
+        title: "Please Login!",
+        icon: "warning"
+      });
     }
     else {
       const reqHeader = {
@@ -59,7 +62,10 @@ function BookNow({ train_id, type, totalSeats }) {
           setBookingId(result.data.id)
         }
         else {
-          alert("Booking failed!")
+          Swal.fire({
+            title: "Booking Failed!",
+            icon: "error"
+          });
           handleClose()
         }
       } catch (err) { console.log(err); }
@@ -68,7 +74,10 @@ function BookNow({ train_id, type, totalSeats }) {
   const getTrainData = async () => {
     let token = sessionStorage.getItem('token')
     if (!token) {
-      alert('Please login')
+      Swal.fire({
+        title: "Please Login!",
+        icon: "warning"
+      });
     }
     else {
       const reqHeader = {

@@ -24,12 +24,9 @@ function StationLogin({register}) {
 
         if(!username || !password){
             Swal.fire({
-                position: "top-center",
-                icon: "warning",
-                title: "Please fill the form",
-                showConfirmButton: false,
-                timer: 1700
-              }); 
+                title: "Fill the details completely!",
+                icon: "warning"
+              });
         }
         else{
             const result = await stationloginaApi(stationdata)
@@ -37,18 +34,9 @@ function StationLogin({register}) {
 
             if(result.status === 200){
                 Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "Login Successfully",
-                    showConfirmButton: false,
-                    timer: 1700
-                  }); 
-                  Swal.fire({
-                    position:"top-center",
-                    title: "Login Successfully",
-                    icon: "success",
-                    timer: 1700
-                  })
+                    title: "Login Successfull!",
+                    icon: "success"
+                  });
                 navigate('/adminhome')
                 sessionStorage.setItem("token",result.data.token)
             }

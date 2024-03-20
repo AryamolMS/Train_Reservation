@@ -6,6 +6,7 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import { Button } from 'bootstrap';
 import { submitFeedbackApi } from '../../services/allAPI';
+import Swal from 'sweetalert2';
 // import StarIcon from '@mui/icons-material/Star';
 
 
@@ -24,12 +25,18 @@ function Feedback({ id }) {
   const handleSubmit = async () => {
 
     if (!feedback.comments) {
-      alert("Please fill the form completely")
+      Swal.fire({
+        title: "Please fill the form completely!",
+        icon: "warning"
+      });
     }
     else {
       let token = sessionStorage.getItem('token')
       if (!token) {
-        alert('Please login')
+        Swal.fire({
+          title: "Please login!",
+          icon: "warning"
+        });
       }
       else {
         const reqHeader = {
@@ -40,12 +47,17 @@ function Feedback({ id }) {
           const result = await submitFeedbackApi(id, feedback, reqHeader)
           console.log(result);
           if (result.status >= 200 && result.status < 300) {
-            alert("Feedback added successfully!")
+            Swal.fire({
+              title: "Feedback added successfully!",
+              icon: "success"
+            });
             setOpen(false)
           }
           else {
             console.log(result);
-            alert(result.response.data.message)
+            Swal.fire({
+              title: (result.response.data.message),
+            });
             setOpen(false)
           }
         }

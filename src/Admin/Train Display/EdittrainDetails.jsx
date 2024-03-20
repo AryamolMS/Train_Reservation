@@ -3,8 +3,9 @@ import { EditFilled } from '@ant-design/icons';
 import Modal from 'react-bootstrap/Modal';
 import { edittrainApi } from '../../services/allAPI';
 import { edittrainContext } from '../../context/ContextShare';
+import Swal from 'sweetalert2';
 
-function EdittrainDetails({ train }) {
+function EdittrainDetails({ train,setSeatUpdate }) {
   const { edittrain, setedittrain } = useContext(edittrainContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -36,7 +37,10 @@ function EdittrainDetails({ train }) {
     const { id, train_name, train_number, source, destination, departure_time, arrival_time, amount_ac, amount_nonac, amount_sleeper } = updatedetails;
 
     if ( !train_number || !source || !destination || !departure_time || !arrival_time || !amount_ac || !amount_nonac || !amount_sleeper) {
-      alert("Please fill this form");
+      Swal.fire({
+        title: "Please fill this form!",
+        icon: "warning"
+      });
     } else {
       const reqBody = new FormData();
 
@@ -61,15 +65,22 @@ function EdittrainDetails({ train }) {
         const result = await edittrainApi(id, reqBody, reqHeader);
         console.log(result);
         if (result.status === 200) {
-          alert("Successfully Updated");
+          Swal.fire({
+            title: "Successfully Updated!",
+            icon: "success"
+          });
           setedittrain(result.data);
+          setSeatUpdate(result.data.id)
           handleClose();
         } else {
           console.log(result.response.data);
         }
       } catch (error) {
         console.error(error);
-        alert("An error occurred. Please try again later.");
+        Swal.fire({
+          title: "An error occurred. Please try again later!",
+          icon: "warning"
+        });
       }
     }
   };
@@ -118,8 +129,8 @@ function EdittrainDetails({ train }) {
           <div className='mb-3 '>
             <input type="number" placeholder='amount_sleeper' className='form-control' value={updatedetails.amount_sleeper} onChange={(e) => setUpdatedetails({ ...updatedetails, amount_sleeper: e.target.value })} />
           </div>
-          <div>
-            <input type="submit" value="Update" className='ms-5 w-75 bg-success text-light' onClick={handleSubmit} />
+          <div className='d-flex justify-content-center'>
+            <input type="submit" value="Update" className='bg-success text-light rounded w-50 p-2' style={{border:'none'}} onClick={handleSubmit} />
           </div>
         </Modal.Body>
       </Modal>

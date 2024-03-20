@@ -33,22 +33,16 @@ function Station() {
 
     if (!name || !station_code || !Location || !phone_number || !username || !password) {
       Swal.fire({
-        position: "top-center",
-        icon: "warning",
-        title: "Please fill the form",
-        showConfirmButton: false,
-        timer: 2000,
+        title: "Please fill the form!",
+        icon: "warning"
       });
     } else {
       const result = await stationregistrationApi();
       console.log(result);
       if(result.status === 200){
         Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Registration Successfull",
-          showConfirmButton: false,
-          timer: 2000,
+          title: "Registration Successfull!",
+          icon: "success"
         });
         setStation({
           name: "",

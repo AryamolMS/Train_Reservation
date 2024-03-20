@@ -3,6 +3,7 @@ import AdminHeader from '../../common/Headers/AdminHeader';
 import { Button } from '@mui/material';
 import Modal from 'react-bootstrap/Modal';
 import { trainregistrationApi } from '../../services/allAPI';
+import Swal from 'sweetalert2';
 
 function AddTrain() {
   const [show, setShow] = useState(false);
@@ -43,7 +44,10 @@ function AddTrain() {
     const { train_name, train_number, source, destination, departure_date, departure_time, arrival_date, arrival_time, amount_ac, amount_nonac, amount_sleeper } = traindetails;
 
     if (!train_name || !train_number || !source || !destination || !departure_date || !departure_time || !arrival_date || !arrival_time || !amount_ac || !amount_nonac || !amount_sleeper) {
-      alert("Fill the details completely");
+      Swal.fire({
+        title: "Fill the details completely!",
+        icon: "warning"
+      });
     } else {
       const departureDateTime = `${departure_date} ${departure_time}`;
       const arrivalDateTime = `${arrival_date} ${arrival_time}`;
@@ -69,15 +73,24 @@ function AddTrain() {
         const result = await trainregistrationApi(reqBody, reqHeader);
         console.log(result);
         if (result.status === 200) {
-          alert("Registration successful");
+          Swal.fire({
+            title: "Registration successful!",
+            icon: "success"
+          });
           handleClose()
           handleClose1()
         } else {
-          alert(result.response.data);
+          Swal.fire({
+            title: (result.response.data),
+            icon: "error"
+          });
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred. Please try again later.");
+        Swal.fire({
+          title: "An error occurred. Please try again later!",
+          icon: "warning"
+        });
       }
     }
   };

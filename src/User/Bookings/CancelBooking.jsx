@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { cancelTicketAPI } from '../../services/allAPI';
+import Swal from 'sweetalert2';
 
 function CancelBooking({id, getbookings}) {
   const [show, setShow] = useState(false);
@@ -11,7 +12,10 @@ function CancelBooking({id, getbookings}) {
   const handelCancel=async()=>{
     let token = sessionStorage.getItem('token')
     if (!token) {
-      alert('Please login')
+      Swal.fire({
+        title: "Please Login!",
+        icon: "warning"
+      });
     }
     else {
       const reqHeader = {
@@ -22,13 +26,19 @@ function CancelBooking({id, getbookings}) {
         const result = await cancelTicketAPI(id, reqHeader)
         console.log(result);
         if (result.status >= 200 && result.status < 300) {
-          alert("Cancellation successful!")
+          Swal.fire({
+            title: "Cancellation Successfull!",
+            icon: "success"
+          });
           handleClose()
           getbookings()
         }
         else {
           console.log(result);
-          alert("Cancellation failed!")
+          Swal.fire({
+            title: "Cancellation Failed!",
+            icon: "error"
+          });
           handleClose()
         }
       }

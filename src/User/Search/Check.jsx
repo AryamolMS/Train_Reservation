@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import { checkavailabilityApi } from '../../services/allAPI';
 import BookNow from '../Bookings/BookNow';
+import Swal from 'sweetalert2';
+import UserHeader from '../../common/Headers/UserHeader'
 
 function Check() {
   const [selectedClass, setSelectedClass] = useState('');
@@ -12,7 +14,10 @@ function Check() {
   const handleCheckAvailability = async () => {
     let token = sessionStorage.getItem('token')
     if (!token) {
-      alert('Please login')
+      Swal.fire({
+        title: "Please login",
+        icon: "warning"
+      });
     }
     else {
       const reqHeader = {
@@ -27,6 +32,10 @@ function Check() {
         setSeatsAvailable(result.data.available_seats)
         }
         else{
+          Swal.fire({
+            title: "No seats available",
+            icon: "warning"
+          });
           console.log(result?.response);
         }
       } catch (error) {
@@ -37,6 +46,7 @@ function Check() {
 
   return (
     <>
+    <UserHeader/>
       <div className="d-flex justify-content-center align-items-center">
         <div className='Card shadow mt-5' style={{ width: '500px', height: '300px' }}>
           <h1 className='text-center text-secondary'>Check Availability</h1>
