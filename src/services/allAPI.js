@@ -78,6 +78,12 @@ export const displayseatsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/station/traincapacity/`,"",reqHeader)
  }
 
+ //edit profile
+ export const editProfileApi = async(reqBody,reqHeader)=>{
+   return  await commonAPI('PUT',`${baseurl}/customer/profile/`,reqBody,reqHeader)
+}
+
+
  // search train
  export const searchTrainApi = async(reqBody)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/search_train/`,reqBody,"")
@@ -116,11 +122,15 @@ export const bookTicketAPI = async (id,reqBody,reqHeader)=>{
 
 // cancel ticket
 export const cancelTicketAPI = async (id,reqHeader)=>{
-   return await commonAPI(`DELETE`,`${baseurl}/customer/bookinghistory/${id}/`,"",reqHeader)
+   return await commonAPI(`POST`,`${baseurl}/customer/bookinghistory/${id}/cancel_and_refund/`,"",reqHeader)
 }
 
 // get train status
 export const getTrainStatusAPI = async (reqBody)=>{
-   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody,"")
+   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody)
 }
 
+// get refund history
+export const getRefundsAPI = async (reqHeader)=>{
+   return await commonAPI(`GET`,`${baseurl}/customer/refunds/`,"",reqHeader)
+}

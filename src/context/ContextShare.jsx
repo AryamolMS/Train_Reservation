@@ -4,14 +4,14 @@ export const isAuthtokenContext = createContext()
 export const edittrainContext = createContext()
 export const addseatContext = createContext()
 
-function ContextShare({children}) {
 
-    const [isAuthtken,setIsAuthtoken] = useState(true)
+function ContextShare({children}) {
+    const [isAuthtoken,setIsAuthtoken] = useState(false)
     const [edittrain,setedittrain] = useState({})
     const [addseat,setSeatadd] = useState({})
   return (
     <>
-    <isAuthtokenContext.Provider value={{isAuthtken,setIsAuthtoken}}>
+    <isAuthtokenContext.Provider value={{isAuthtoken,setIsAuthtoken}}>
       <edittrainContext.Provider value={{edittrain,setedittrain}}>
         <addseatContext.Provider value={{addseat,setSeatadd}}>
       {children}

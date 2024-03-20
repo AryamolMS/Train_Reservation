@@ -7,67 +7,67 @@ import UserHeader from '../Headers/UserHeader'
 import { Container } from 'react-bootstrap'
 import Header from '../Headers/Header'
 
-function Home({home}) {
-  const commonhome = home?true:false
+function Home({ home }) {
+  const commonhome = home ? true : false
   return (
     <>
-     <div className='home'>
-     {commonhome?
-      <Header/>
-     :
-     <UserHeader/>}
-      <div className='homecard Card shadow d-flex  justify-content-center mb-5'>
-      <div className="search d-flex align-items-center justify-content-center mb-3 mt-3" style={{ height: "100px", width: "80%" }}>
-  <Link to={'/search'} className="w-25 me-2">
-    <select name="" id="" style={{ width: "150px" }}>
-      <option value="">From</option>
-      <option value="">New Delhi</option>
-      <option value="">Kolkatha</option>
-      <option value="">Banglore</option>
-      <option value="">Ernakulam</option>
-    </select>
-  </Link>
+      <div className='home'>
+        {commonhome ?
+          <Header />
+          :
+          <UserHeader />}
+        <div className='homecard Card shadow d-flex  justify-content-center mb-5'>
+          <div className="search d-flex align-items-center justify-content-center mb-3 mt-3" style={{ height: "100px", width: "80%" }}>
+            <Link to={'/search'} className="w-25 me-2">
+              <select name="" id="" style={{ width: "150px" }}>
+                <option value="">From</option>
+                <option value="">New Delhi</option>
+                <option value="">Kolkatha</option>
+                <option value="">Banglore</option>
+                <option value="">Ernakulam</option>
+              </select>
+            </Link>
 
-  <Link to={'/search'} className="w-25 me-2">
-    <select name="" id="" style={{ width: "150px" }}>
-      <option value="">To</option>
-      <option value="">Ernakulam</option>
-      <option value="">Banglore</option>
-      <option value="">Kolkatha</option>
-      <option value="">New Delhi</option>
-    </select>
-  </Link>
+            <Link to={'/search'} className="w-25 me-2">
+              <select name="" id="" style={{ width: "150px" }}>
+                <option value="">To</option>
+                <option value="">Ernakulam</option>
+                <option value="">Banglore</option>
+                <option value="">Kolkatha</option>
+                <option value="">New Delhi</option>
+              </select>
+            </Link>
 
- <Link to={'/search'}> <input type="date" name="" id="" className="me-4" /></Link>
-</div>
+            <Link to={'/search'}> <input type="date" name="" id="" className="me-4" /></Link>
+          </div>
 
 
+        </div>
       </div>
-    </div> 
-    <div className='text-center mt-4'>
+      <div className='text-center mt-4'>
         <h1>Offers For You</h1>
-       <div className='mt-4 d-flex align-items-center justify-content-center'>
+        <div className='mt-4 d-flex align-items-center justify-content-center'>
           <div className='Card shadow offers rounded d-flex'>
             <div className='mt-3'>
-            <img className='rounded' src={offerImage} alt="no image" style={{width:'200px',height:'200px'}}/>
+              <img className='rounded' src={offerImage} alt="no image" style={{ width: '200px', height: '200px' }} />
             </div>
-            <div className='mt-3'>         
-             <h3>Flat Rs 80 OFF on Train tickets</h3>
-             <p>Offer valid till : 31 Mar</p>
-             <button className='btn5'>SUPERB80</button>
-            </div>    
+            <div className='mt-3'>
+              <h3>Flat Rs 80 OFF on Train tickets</h3>
+              <p>Offer valid till : 31 Mar</p>
+              <button className='btn5'>SUPERB80</button>
+            </div>
           </div>
           <div className='Card shadow offers rounded d-flex ms-5'>
             <div className='mt-3'>
-            <img className='rounded' src={offerImage2} alt="no image" style={{width:'200px',height:'200px'}}/>
+              <img className='rounded' src={offerImage2} alt="no image" style={{ width: '200px', height: '200px' }} />
             </div>
-            <div className='mt-3'>         
-             <h3>Flat Rs 80 OFF on Train tickets</h3>
-             <p>Offer valid till : 31 Mar</p>
-             <button className='btn5'>SUPERB80</button>
-            </div>    
+            <div className='mt-3'>
+              <h3>Flat Rs 80 OFF on Train tickets</h3>
+              <p>Offer valid till : 31 Mar</p>
+              <button className='btn5'>SUPERB80</button>
+            </div>
           </div>
-       </div>
+        </div>
       </div>
 
       <div className='ms-5'>
