@@ -1,5 +1,6 @@
 import { baseurl } from "./baseurl"
-import { commonAPI } from "./commonAPI"
+import { commonAPI, fakeAPI } from "./commonAPI"
+
 
 
 //user registration
@@ -104,10 +105,22 @@ export const getlivestatusApi = async (reqBody)=>{
 //add payment api
 
 export const addPaymentAPI = async (id,reqHeader)=>{
-   return await commonAPI(`POST`,`${baseurl}/customer/bookinghistory/${id}/add_payment/`,"",reqHeader)
+   return await fakeAPI(`POST`,`${baseurl}/customer/bookinghistory/${id}/add_payment/`,reqHeader)
 }
 
 // book ticket
 export const bookTicketAPI = async (id,reqBody,reqHeader)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/book_ticket/`,reqBody,reqHeader)
 }
+
+
+// cancel ticket
+export const cancelTicketAPI = async (id,reqHeader)=>{
+   return await commonAPI(`DELETE`,`${baseurl}/customer/bookinghistory/${id}/`,"",reqHeader)
+}
+
+// get train status
+export const getTrainStatusAPI = async (reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody,"")
+}
+

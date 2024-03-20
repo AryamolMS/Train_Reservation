@@ -3,8 +3,9 @@ import './bookingcard.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import Feedback from '../Feedback/Feedback';
 import CancelBooking from './CancelBooking';
+import Payment from './Payment';
 
-function BookingCard({ bookings }) {
+function BookingCard({ bookings,getbookings }) {
   const formatDate = (datetimeString) => {
     const dateObj = new Date(datetimeString);
     const options = { weekday: 'short', day: '2-digit', month: 'short' };
@@ -25,7 +26,10 @@ function BookingCard({ bookings }) {
               <h6>Reserved seat : {bookings.reserved_seats}</h6>
               <h6>Reservation date : {formatDate(bookings.reservation_date)}</h6>
               <h6>Booking status : {bookings.booking_status}</h6>
-              <CancelBooking/>
+              {bookings.booking_status!="Cancelled"&&<CancelBooking id={bookings.id} getbookings={getbookings}/>}
+              
+              {bookings.booking_status=="Pending"&&<Payment id={bookings.id} amount={bookings.booking_amount} closeBookNow={getbookings}/>}
+              
               <Feedback id={bookings?.train_number?.id}/>
             </div>
           </Col>

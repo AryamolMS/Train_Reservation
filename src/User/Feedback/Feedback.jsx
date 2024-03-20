@@ -37,14 +37,22 @@ function Feedback({ id }) {
           "Authorization": `Token ${token}`,
         };
         try {
-          const result = await submitFeedbackApi(id,feedback,reqHeader)
+          const result = await submitFeedbackApi(id, feedback, reqHeader)
           console.log(result);
-      //  do the rest after getting
+          if (result.status >= 200 && result.status < 300) {
+            alert("Feedback added successfully!")
+            setOpen(false)
+          }
+          else {
+            console.log(result);
+            alert(result.response.data.message)
+            setOpen(false)
+          }
         }
         catch (err) {
           console.log(err);
         }
-      }   
+      }
     }
 
   }
@@ -95,7 +103,7 @@ function Feedback({ id }) {
               </div>
               <textarea name="" id="" cols="30" rows="5" value={feedback.comments} onChange={e => setFeedback({ ...feedback, comments: e.target.value })} placeholder='Your comments..'></textarea>
               <button className='btn btn-success ms-4 mt-2' onClick={handleSubmit}>Submit</button>
-              </div>
+            </div>
           </Collapse>
         </div>
       </div>
