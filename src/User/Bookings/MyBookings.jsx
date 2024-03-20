@@ -6,7 +6,6 @@ import { Col, Row } from 'react-bootstrap'; // Import Col from react-bootstrap
 
 function MyBookings() {
   const [bookings, setuserbooking] = useState([]);
-
   const getbookings = async () => {
     if (sessionStorage.getItem("token")) {
       const token = sessionStorage.getItem("token");
@@ -14,7 +13,6 @@ function MyBookings() {
         "Content-Type": "application/json",
         "Authorization": `Token ${token}`,
       };
-
       const result = await bookingsApi(reqHeader);
       console.log(result.data);
       setuserbooking(result.data);

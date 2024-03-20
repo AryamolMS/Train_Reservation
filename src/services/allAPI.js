@@ -122,7 +122,7 @@ export const bookTicketAPI = async (id,reqBody,reqHeader)=>{
 
 // cancel ticket
 export const cancelTicketAPI = async (id,reqHeader)=>{
-   return await commonAPI(`DELETE`,`${baseurl}/customer/bookinghistory/${id}/`,"",reqHeader)
+   return await commonAPI(`POST`,`${baseurl}/customer/bookinghistory/${id}/cancel_and_refund/`,"",reqHeader)
 }
 
 // get train status
@@ -130,3 +130,7 @@ export const getTrainStatusAPI = async (reqBody)=>{
    return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody)
 }
 
+// get refund history
+export const getRefundsAPI = async (reqHeader)=>{
+   return await commonAPI(`GET`,`${baseurl}/customer/refunds/`,"",reqHeader)
+}
