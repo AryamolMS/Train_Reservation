@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Check() {
 
-    
+   
   return (
     <>
      <div className="d-flex justify-content-center align-items-center">
@@ -13,9 +13,10 @@ function Check() {
                 <div className='mt-4'>
                 </div>
                 <div className='mt-5 ms-5' >
-                    <select name="" id="" className='w-75'>
+                    <select name="" id="" className='w-75' >
                         <option value="">Select</option>
                         <option value="ac">AC</option>
+                        
                         <option value="nonac">NON AC</option>
                         <option value="sleeper">SLEEPER</option>
                     </select>

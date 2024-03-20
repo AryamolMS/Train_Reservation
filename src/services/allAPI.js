@@ -83,3 +83,8 @@ export const seatlimitApi = async (trainId, reqBody, reqHeader) => {
 export const displayseatsApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/station/traincapacity/`,"",reqHeader)
  }
+
+ //edit profile
+ export const editProfileApi = async(reqBody,reqHeader)=>{
+   return  await commonAPI('PUT',`${baseurl}/customer/profile/`,reqBody,reqHeader)
+}
