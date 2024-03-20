@@ -127,6 +127,6 @@ export const cancelTicketAPI = async (id,reqHeader)=>{
 
 // get train status
 export const getTrainStatusAPI = async (reqBody)=>{
-   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody,"")
+   return await commonAPI(`POST`,`${baseurl}/customer/train_status/`,reqBody)
 }
 

@@ -9,10 +9,26 @@ import Swal from 'sweetalert2';
 
 
 function UserHeader({login}) {
-
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
   const navigate =useNavigate()
+  const [show, setShow] = useState(false);
+  const handleClose = () => {setShow(false)};
+  const handleShow = () => setShow(true);
+  const [useredit,setUseredit] = useState([])
+  // const [photo, setPhoto] =useState(null);
+  const [existingUser,setExistinguser] = useState("")
+  const[existingimage,setExistingimage]=useState("")
+  const [preview,setPreview] = useState("") //to display //storing url
+  const [isUpdate,setIsUpdate] =useState(false)
 
+  const [userProfile,setUserprofile] = useState({
+    name: "",
+    age: "",
+    email_address: "",
+    biodata: null,
+    username: "",
+    // password: "",
+  });
   const logeout = ()=>{
     sessionStorage.removeItem("token")
     sessionStorage.removeItem("userDetails")
@@ -21,41 +37,19 @@ function UserHeader({login}) {
    
   }
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => {setShow(false)};
-  const handleShow = () => setShow(true);
 
-  const [useredit,setUseredit] = useState([])
-  const [photo, setPhoto] =useState(null);
-
-
-   const [userProfile,setUserprofile] = useState({
-    name: "",
-    age: "",
-    email_address: "",
-    biodata: null,
-    username: "",
-    // password: "",
-  });
-
-  const [isUpdate,setIsUpdate] =useState(false)
 
 
   const HandleImageChange =(e)=>{
     const file = e.target.files[0];
-    setPhoto(file);
+    setExistingimage(file);
     setUserprofile((p)=>({
       ...p,
       biodata:file,
     }))
-    
-  
 
   }
 
-  const [existingUser,setExistinguser] = useState("")
-  const[existingimage,setExistingimage]=useState("")
-  const [preview,setPreview] = useState("") //to display //storing url
 
    const getuserdetails = async()=>{
     if(sessionStorage.getItem("token")){
@@ -84,7 +78,7 @@ console.log(useredit)
   useEffect(()=>{
  
     getuserdetails()
-  },[])
+  },[isUpdate])
  
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("userDetails"));
@@ -113,7 +107,6 @@ console.log(useredit)
  useEffect(()=>{
   if(userProfile.biodata){
     setPreview(URL.createObjectURL(userProfile.biodata))
-
  }
  else{
   setPreview("")
@@ -164,6 +157,7 @@ if(preview){
     });
     sessionStorage.setItem("existingUser",JSON.stringify(result.data))
     setIsUpdate(true)
+    
    }
 else{
   console.log(result.response.data);
@@ -231,7 +225,9 @@ useEffect(()=>{
               <input value={userProfile.age} onChange={(e)=>setUserprofile({...userProfile,age:e.target.value})} style={{borderRadius:'10px',border:'1px solid black'}} type="age" placeholder='Enter age' className='form-control mt-4 w-75 ms-5'/> <br />
              <div className='text-center'> 
              <img
-  src={existingimage ? `http://127.0.0.1:8000/${existingimage}`: `http://127.0.0.1:8000/${existingUser}`}
+  // src={existingimage ? `http://127.0.0.1:8000/${existingimage}`: `http://127.0.0.1:8000/${existingUser}`}
+  src={preview ? preview: `http://127.0.0.1:8000/${existingUser}`}
+
   alt=''
   width={300}
 />

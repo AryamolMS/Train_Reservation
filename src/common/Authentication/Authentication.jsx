@@ -201,18 +201,19 @@ function Authentication({login}) {
 export default Authentication
  */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Authentication.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getuserApi, loginaApi, registrationapi } from '../../services/allAPI';
 import Swal from 'sweetalert2';
+import { isAuthtokenContext } from '../../context/ContextShare';
 
 function Authentication({ login }) {
   const loginForm = login ? true : false;
   const navigate = useNavigate();
-
+  const { isAuthtoken, setIsAuthtoken } = useContext(isAuthtokenContext)
   const [data, setdata] = useState({
     name: "",
     age: "",
@@ -254,6 +255,7 @@ function Authentication({ login }) {
       console.log(result);
       if (result.status === 200) {
         console.log(result.data);
+        setIsAuthtoken(true)
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -389,7 +391,7 @@ function Authentication({ login }) {
         <Col md={2}>
         </Col>
       </Container>
-      <ToastContainer theme='colored' position='top-center' autoClose={2000}/>
+      <ToastContainer theme='colored' position='top-center' autoClose={2000} />
     </>
   )
 }
