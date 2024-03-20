@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BookingCard from './BookingCard';
 import UserHeader from '../../common/Headers/UserHeader';
 import { bookingsApi } from '../../services/allAPI';
-import { Col } from 'react-bootstrap'; // Import Col from react-bootstrap
+import { Col, Row } from 'react-bootstrap'; // Import Col from react-bootstrap
 
 function MyBookings() {
   const [bookings, setuserbooking] = useState([]);
@@ -30,16 +30,16 @@ function MyBookings() {
       <UserHeader />
       <div className='maindiv'>
         <h1 className='text-center mt-4 text-warning'>BOOKING DETAILS</h1>
-        <div className='d-flex align-items-center justify-content-center'>
+        <Row>
           {bookings?.length > 0 ?
             bookings.map((item, index) => (
               <Col key={index} sm={12} md={6} lg={4} xl={4}> 
-                <BookingCard bookings={item} />
+                <BookingCard bookings={item} getbookings={getbookings} />
               </Col>
             )) :
             <p>No bookings</p>
           }
-        </div>
+        </Row>
       </div>
     </>
   );

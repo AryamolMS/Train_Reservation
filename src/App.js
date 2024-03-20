@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, redirect } from 'react-router-dom';
 import './App.css';
 import Authentication from './common/Authentication/Authentication';
 import AdminHeader from './common/Headers/AdminHeader';
@@ -18,6 +18,9 @@ import Footer from './common/Footer/Footer';
 import { useContext } from 'react';
 import { isAuthtokenContext } from './context/ContextShare';
 import Feedback from './User/Feedback/Feedback';
+import Status from './User/TrainStatus/Status';
+import Payment from './User/Bookings/Payment';
+import Refunds from './User/Refunds/Refunds';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -38,14 +41,15 @@ function App() {
         <Route path='/stationlogin' element={<StationLogin/>}/>
         <Route path='/displaytrain' element={<Displaytrain/>}/>
         <Route path='/booknow' element={<BookNow/>}/>
-        <Route path='/check' element={<Check/>}/>
+        <Route path='/check/:id' element={<Check/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
+        <Route path='/livestatus' element={<Status/>}/>
+        <Route path='/payment' element={<Payment/>}/>
+        <Route path='/refunds' element={<Refunds/>}/>
+        <Route path='/*' element={<Navigate to={'/'}/>}/>
       </Routes>
       <Footer/>
-
     </div>
-    
   );
 }
-
 export default App;

@@ -43,6 +43,12 @@ function StationLogin({register}) {
                     showConfirmButton: false,
                     timer: 1700
                   }); 
+                  Swal.fire({
+                    position:"top-center",
+                    title: "Login Successfully",
+                    icon: "success",
+                    timer: 1700
+                  })
                 navigate('/adminhome')
                 sessionStorage.setItem("token",result.data.token)
             }
