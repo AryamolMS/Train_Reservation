@@ -161,6 +161,11 @@ function UserHeader({ login }) {
     <>
       <div className="userheader d-flex  text-light">
         <div className="ms-auto me-3 p-2 d-flex m-2">
+       <Link to={'/userhome'}  style={{ textDecoration: "none", color: "white" }}>
+          <p className="me-4">
+              Home
+            </p>
+       </Link>
           <p className="me-4" onClick={handleShow}>
             Profile
           </p>
