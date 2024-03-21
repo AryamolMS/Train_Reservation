@@ -29,11 +29,8 @@ function Authentication({ login }) {
 
     if (!name || !age || !email_address || !biodata || !username || !password) {
       Swal.fire({
-        position: "top-center",
-        icon: "warning",
-        title: "Please fill the form",
-        showConfirmButton: false,
-        timer: 1700
+        title: "Fill the details completely!",
+        icon: "warning"
       });
     } else {
       const reqBody = new FormData();
@@ -55,11 +52,8 @@ function Authentication({ login }) {
         console.log(result.data);
         setIsAuthtoken(true)
         Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Registered Successfully",
-          showConfirmButton: false,
-          timer: 1700
+          title: "Registred successfully!",
+          icon: "success"
         });
         setdata({
           name: "",
@@ -73,11 +67,8 @@ function Authentication({ login }) {
       } else {
         console.log(result.response.data);
         Swal.fire({
-          position: "top-center",
-          icon: "error",
-          title: "Something went wrong",
-          showConfirmButton: false,
-          timer: 2000
+          title: "Something went wrong!",
+          icon: "warning"
         });
       }
     }
@@ -111,6 +102,10 @@ function Authentication({ login }) {
         });
         navigate('/userhome');
       } else {
+        Swal.fire({
+          title: "Invalid username or password!",
+          icon: "warning"
+        });
         console.log(result.response.data);
       }
     }
