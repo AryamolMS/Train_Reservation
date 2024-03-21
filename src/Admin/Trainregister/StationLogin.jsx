@@ -42,6 +42,10 @@ function StationLogin({register}) {
                 navigate('/adminhome')
             }
             else{
+                Swal.fire({
+                    title: "Invalid username or pasword!",
+                    icon: "error"
+                  });
                 console.log(result.response.data);
             }
         }

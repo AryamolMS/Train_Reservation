@@ -64,6 +64,7 @@ function Search({ login }) {
 
   return (
     <>
+    <UserHeader/>
       {loginForm && <UserHeader />}
       <div className="d-flex align-items-center justify-content-center mb-3 mt-3" style={{ height: "50px" }}>
         {trainlist.length > 0 ? (

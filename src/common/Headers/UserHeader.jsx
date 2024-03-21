@@ -1,27 +1,28 @@
-import React, { useContext, useEffect } from 'react'
-import './UserHeader.css'
-import { Link, useNavigate } from 'react-router-dom'
-import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
-import { isAuthtokenContext } from '../../context/ContextShare';
-import { editProfileApi, getuserApi } from '../../services/allAPI';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect } from "react";
+import "./UserHeader.css";
+import { Link, useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
+import { isAuthtokenContext } from "../../context/ContextShare";
+import { editProfileApi, getuserApi } from "../../services/allAPI";
+import Swal from "sweetalert2";
 
-
-function UserHeader({login}) {
-  const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
-  const navigate =useNavigate()
+function UserHeader({ login }) {
+  const { isAuthtken, setIsAuthtoken } = useContext(isAuthtokenContext);
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const handleClose = () => {setShow(false)};
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
-  const [useredit,setUseredit] = useState([])
+  const [useredit, setUseredit] = useState([]);
   // const [photo, setPhoto] =useState(null);
-  const [existingUser,setExistinguser] = useState("")
-  const[existingimage,setExistingimage]=useState("")
-  const [preview,setPreview] = useState("") //to display //storing url
-  const [isUpdate,setIsUpdate] =useState(false)
+  const [existingUser, setExistinguser] = useState("");
+  const [existingimage, setExistingimage] = useState("");
+  const [preview, setPreview] = useState(""); //to display //storing url
+  const [isUpdate, setIsUpdate] = useState(false);
 
-  const [userProfile,setUserprofile] = useState({
+  const [userProfile, setUserprofile] = useState({
     name: "",
     age: "",
     email_address: "",
@@ -29,61 +30,52 @@ function UserHeader({login}) {
     username: "",
     // password: "",
   });
-  const logeout = ()=>{
-    sessionStorage.removeItem("token")
-    sessionStorage.removeItem("userDetails")
-    sessionStorage.clear()
-    setIsAuthtoken(false)
-    navigate('/')
-   
-  }
+  const logeout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userDetails");
+    sessionStorage.clear();
+    setIsAuthtoken(false);
+    navigate("/");
+  };
 
-
-
-
-  const HandleImageChange =(e)=>{
+  const HandleImageChange = (e) => {
     const file = e.target.files[0];
     setExistingimage(file);
-    setUserprofile((p)=>({
+    setUserprofile((p) => ({
       ...p,
-      biodata:file,
-    }))
+      biodata: file,
+    }));
+  };
 
-  }
-
-
-   const getuserdetails = async()=>{
-    if(sessionStorage.getItem("token")){
-      const token = sessionStorage.getItem("token")
+  const getuserdetails = async () => {
+    if (sessionStorage.getItem("token")) {
+      const token = sessionStorage.getItem("token");
       const reqHeader = {
-        'Content-Type':'application/json',
-        'Authorization':`Token ${token}`
-      }
-   
-    const result = await getuserApi(reqHeader)
-    console.log(result);
-    
-    sessionStorage.setItem("userDetails", JSON.stringify(result.data));
-    setUseredit(result.data)
-    
-  }
-} 
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
 
-console.log(existingimage)
+      const result = await getuserApi(reqHeader);
+      console.log(result);
 
-console.log(useredit)
+      sessionStorage.setItem("userDetails", JSON.stringify(result.data));
+      setUseredit(result.data);
+    }
+  };
 
-  
-  const loginForm = login?true:false
+  console.log(existingimage);
 
-  useEffect(()=>{
- 
-    getuserdetails()
-  },[isUpdate])
- 
+  console.log(useredit);
+
+  const loginForm = login ? true : false;
+
   useEffect(() => {
-    if(sessionStorage.getItem("userDetails")){
-      const user = JSON.parse(sessionStorage.getItem("userDetails"))
+    getuserdetails();
+  }, [isUpdate]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("userDetails")) {
+      const user = JSON.parse(sessionStorage.getItem("userDetails"));
       if (user) {
         setUserprofile({
           ...userProfile,
@@ -92,107 +84,116 @@ console.log(useredit)
           email_address: user.email_address || "",
           username: user.username || "",
           password: user.password || "",
-          biodata: ""
+          biodata: "",
         });
         setExistinguser(user.biodata || "");
       }
-      }
-
+    }
   }, []);
   console.log(userProfile);
 
-  
- useEffect(()=>{
-  if(userProfile.biodata){
-    setPreview(URL.createObjectURL(userProfile.biodata))
- }
- else{
-  setPreview("")
- }
- },[userProfile.biodata])
+  useEffect(() => {
+    if (userProfile.biodata) {
+      setPreview(URL.createObjectURL(userProfile.biodata));
+    } else {
+      setPreview("");
+    }
+  }, [userProfile.biodata]);
 
- const handleProfileUpdate = async()=>{
+  const handleProfileUpdate = async () => {
+    const { username, age, biodata, email_address } = userProfile;
 
-const {username ,age ,biodata ,email_address}= userProfile
- 
- if(!username ||!age ||!biodata ||!email_address) {
-  Swal.fire({
-    position: "top-center",
-    icon: "warning",
-    title: "Please fill the form completely",
-    showConfirmButton: false,
-    timer: 1700
-  });
- }
-else{
-     const reqBody = new FormData()
-     reqBody.append("name",username)
-     reqBody.append("age",age)
-     reqBody.append("email_address",email_address)
-     reqBody.append("biodata",biodata)
+    if (!username || !age || !biodata || !email_address) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please fill the form completely",
+        showConfirmButton: false,
+        timer: 1700,
+      });
+    } else {
+      const reqBody = new FormData();
+      reqBody.append("name", username);
+      reqBody.append("age", age);
+      reqBody.append("email_address", email_address);
+      reqBody.append("biodata", biodata);
 
-     preview?reqBody.append("biodata",biodata):reqBody.append("biodata",existingUser)//preview is there profile otherwise existing image
+      preview
+        ? reqBody.append("biodata", biodata)
+        : reqBody.append("biodata", existingUser); //preview is there profile otherwise existing image
 
+      const token = sessionStorage.getItem("token");
+      if (preview) {
+        const reqHeader = {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${token}`,
+        };
 
-const token = sessionStorage.getItem("token")
-if(preview){
-   const reqHeader={
-    "Content-Type":"multipart/form-data",
-    "Authorization":`Token ${token}`
-   }
+        const result = await editProfileApi(reqBody, reqHeader);
+        console.log(result);
+        if (result.status === 200) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Profile updated successfully",
+            showConfirmButton: false,
+            timer: 1700,
+          });
+          sessionStorage.setItem("existingUser", JSON.stringify(result.data));
+          setIsUpdate(true);
+        } else {
+          console.log(result.response.data);
+        }
+      } else {
+        const reqHeader = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+      }
+    }
+  };
+  console.log(userProfile);
 
-   const result = await editProfileApi(reqBody,reqHeader)
-   console.log(result);
-   if(result.status===200){
-    
-
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Profile updated successfully",
-      showConfirmButton: false,
-      timer: 1700
-    });
-    sessionStorage.setItem("existingUser",JSON.stringify(result.data))
-    setIsUpdate(true)
-    
-   }
-else{
-  console.log(result.response.data);
-}
-}
- 
- else{
-  const reqHeader ={
-    "Content-Type":"application/json",
-    "Authorization":`Bearer ${token}`
-  }
- }
- 
- }
-}
-console.log(userProfile);
-
-useEffect(()=>{
-  const profile=(JSON.parse(sessionStorage.getItem('existingUser')))
-
-},[isUpdate])
+  useEffect(() => {
+    const profile = JSON.parse(sessionStorage.getItem("existingUser"));
+  }, [isUpdate]);
   return (
     <>
-     <div className='userheader d-flex  text-light'>
-       <div className='ms-auto me-3 p-2 d-flex m-2'>
-        <p className='me-4' onClick={handleShow}>Profile</p>
-        <Link to={'/userbookings'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>My Bookings</p></Link>
-        <Link to={'/livestatus'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Train status</p></Link>
-        <Link to={'/search'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Search</p></Link>
-        <Link to={'/refunds'} style={{textDecoration:'none',color:'white'}}><p className='me-4'>Refunds</p></Link>
+      <div className="userheader d-flex  text-light">
+        <div className="ms-auto me-3 p-2 d-flex m-2">
+          <p className="me-4" onClick={handleShow}>
+            Profile
+          </p>
+          <Link
+            to={"/userbookings"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <p className="me-4">My Bookings</p>
+          </Link>
+          <Link
+            to={"/livestatus"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <p className="me-4">Train status</p>
+          </Link>
+          <Link
+            to={"/search"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <p className="me-4">Search</p>
+          </Link>
+          <Link
+            to={"/refunds"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <p className="me-4">Refunds</p>
+          </Link>
 
-                
-        <p onClick={logeout}>LogOut</p>
+          <p onClick={logeout}>LogOut</p>
         </div>
-    </div> 
+      </div>
 
-    <Modal
+      <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
@@ -202,25 +203,58 @@ useEffect(()=>{
           <Modal.Title>Update Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-              <input value={userProfile.name} onChange={(e)=>setUserprofile({...userProfile,name:e.target.value})} style={{borderRadius:'10px',border:'1px solid black'}} type="text" placeholder='Enter name' className='form-control mt-4 w-75 ms-5' /> <br />
-              <input value={userProfile.age} onChange={(e)=>setUserprofile({...userProfile,age:e.target.value})} style={{borderRadius:'10px',border:'1px solid black'}} type="age" placeholder='Enter age' className='form-control mt-4 w-75 ms-5'/> <br />
-             <div className='text-center'> 
-             <img
-  // src={existingimage ? `http://127.0.0.1:8000/${existingimage}`: `http://127.0.0.1:8000/${existingUser}`}
-  src={preview ? preview: `http://127.0.0.1:8000/${existingUser}`}
-
-  alt=''
-  width={300}
-/>
-             </div>
-              <input  onChange={(e)=>setUserprofile({...userProfile,biodata:e.target.files[0]})}
-             
-              
-
-              style={{borderRadius:'10px',border:'1px solid black'}} type="file" placeholder='choose file' className='form-control mt-4 w-75 ms-5'/> <br />
-              <input value={userProfile.email_address} onChange={(e)=>setUserprofile({...userProfile,email_address:e.target.value})}style={{borderRadius:'10px',border:'1px solid black'}} type="email" placeholder='Enter email' className='form-control w-75 ms-5'/> <br/>
-
-              {/* <input
+          <input
+            value={userProfile.name}
+            onChange={(e) =>
+              setUserprofile({ ...userProfile, name: e.target.value })
+            }
+            style={{ borderRadius: "10px", border: "1px solid black" }}
+            type="text"
+            placeholder="Enter name"
+            className="form-control mt-4 w-75 ms-5"
+          />{" "}
+          <br />
+          <input
+            value={userProfile.age}
+            onChange={(e) =>
+              setUserprofile({ ...userProfile, age: e.target.value })
+            }
+            style={{ borderRadius: "10px", border: "1px solid black" }}
+            type="age"
+            placeholder="Enter age"
+            className="form-control mt-4 w-75 ms-5"
+          />{" "}
+          <br />
+          <div className="text-center">
+            <img
+              // src={existingimage ? `http://127.0.0.1:8000/${existingimage}`: `http://127.0.0.1:8000/${existingUser}`}
+              src={preview ? preview : `http://127.0.0.1:8000/${existingUser}`}
+              alt=""
+              width={300}
+            />
+          </div>
+          <input
+            onChange={(e) =>
+              setUserprofile({ ...userProfile, biodata: e.target.files[0] })
+            }
+            style={{ borderRadius: "10px", border: "1px solid black" }}
+            type="file"
+            placeholder="choose file"
+            className="form-control mt-4 w-75 ms-5"
+          />{" "}
+          <br />
+          <input
+            value={userProfile.email_address}
+            onChange={(e) =>
+              setUserprofile({ ...userProfile, email_address: e.target.value })
+            }
+            style={{ borderRadius: "10px", border: "1px solid black" }}
+            type="email"
+            placeholder="Enter email"
+            className="form-control w-75 ms-5"
+          />{" "}
+          <br />
+          {/* <input
             value={userProfile.password}
             onChange={(e) => setUserprofile({ ...userProfile, password: e.target.value })}
             style={{ borderRadius: '10px', border: '1px solid black' }}
@@ -228,13 +262,18 @@ useEffect(()=>{
             placeholder='Enter password'
             className='form-control w-75 ms-5'
           />{' '}<br/> */}
-              <button type='submit' onClick={handleProfileUpdate}className='btn btn-primary w-50' style={{marginLeft:'100px'}} >Update</button>
-              
+          <button
+            type="submit"
+            onClick={handleProfileUpdate}
+            className="btn btn-primary w-50"
+            style={{ marginLeft: "100px" }}
+          >
+            Update
+          </button>
         </Modal.Body>
-       
       </Modal>
     </>
-  )
-  }
+  );
+}
 
-export default UserHeader
+export default UserHeader;

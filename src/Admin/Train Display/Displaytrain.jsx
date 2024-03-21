@@ -54,11 +54,7 @@ const [seatUpdate,setSeatUpdate]=useState("")
   useEffect(() => {
     gettrains();
     getseats()
-  }, [edittrain, seatUpdate]);
-
-  useEffect(()=>{
-
-  },[addseat])
+  }, [edittrain, seatUpdate,addseat])
 
   return (
     <>
