@@ -21,6 +21,8 @@ import Feedback from './User/Feedback/Feedback';
 import Status from './User/TrainStatus/Status';
 import Payment from './User/Bookings/Payment';
 import Refunds from './User/Refunds/Refunds';
+import GuestSearch from './User/Search/GuestSearch';
+import Paynow from './User/Bookings/Paynow';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -46,7 +48,10 @@ function App() {
         <Route path='/livestatus' element={<Status/>}/>
         <Route path='/payment' element={<Payment/>}/>
         <Route path='/refunds' element={<Refunds/>}/>
-        <Route path='/*' element={<Navigate to={'/'}/>}/>
+        <Route path='/*' element={<Navigate to={'/'} />} />
+        <Route path='/guestsearch' element={<GuestSearch/>}/>
+        <Route path='/paynow' element={<Paynow/>}/>
+
       </Routes>
       <Footer/>
     </div>

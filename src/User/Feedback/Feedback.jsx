@@ -1,13 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
-import { StarOutlined } from '@ant-design/icons';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
-import { Button } from 'bootstrap';
 import { submitFeedbackApi } from '../../services/allAPI';
 import Swal from 'sweetalert2';
-// import StarIcon from '@mui/icons-material/Star';
 
 
 function Feedback({ id }) {

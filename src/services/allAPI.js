@@ -66,8 +66,11 @@ export const edittrainApi = async(trainId,reqBody,reqHeader)=>{
 //trainlist
 export const listtrainApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/train/`,"",reqHeader)
+} 
+export const guesttrainApi = async()=>{
+   return  await commonAPI('GET',`${baseurl}/train/`,"")
  } 
-
+ 
  // get user details
  export const getuserApi = async(reqHeader)=>{
    return  await commonAPI('GET',`${baseurl}/customer/profile/`,"",reqHeader)
@@ -90,8 +93,8 @@ export const displayseatsApi = async(reqHeader)=>{
 }
 
 //check availability
-export const checkavailabilityApi = async(id,reqBody,reqHeader)=>{
-   return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/check_availability/`,reqBody,reqHeader)
+export const checkavailabilityApi = async(id,reqBody)=>{
+   return await commonAPI(`POST`,`${baseurl}/customer/train/${id}/check_availability/`,reqBody,"")
 }
 // add feedback api
 export const submitFeedbackApi = async (id,reqBody,reqHeader)=>{

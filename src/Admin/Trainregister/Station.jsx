@@ -24,21 +24,22 @@ function Station() {
       password: "",
     });
   };
+  console.log(station);
 
+ 
   const handleAdd = async (e) => {
     e.preventDefault();
-
-    const { name, station_code, Location, phone_number, username, password } =
-      station;
-
+  
+    const { name, station_code, Location, phone_number, username, password } = station;
+  
     if (!name || !station_code || !Location || !phone_number || !username || !password) {
       Swal.fire({
         title: "Please fill the form!",
         icon: "warning"
       });
     } else {
-      const result = await stationregistrationApi();
-      console.log(result);
+      const result = await stationregistrationApi(station); // Pass station data to the API function
+      console.log(result.data);
       if(result.status === 200){
         Swal.fire({
           title: "Registration Successfull!",
@@ -55,7 +56,7 @@ function Station() {
       }
     }
   };
-  console.log(station);
+  
   return (
     <>
       <div

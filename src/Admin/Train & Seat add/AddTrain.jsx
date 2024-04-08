@@ -97,9 +97,24 @@ function AddTrain() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+  
+    // Check if the input field is either arrival_date or departure_date
+    if (name === "arrival_date" || name === "departure_date") {
+      const selectedDate = new Date(value);
+      const currentDate = new Date();
+      if (selectedDate < currentDate) {
+        // Display an error message or handle the validation as needed
+        alert("Date cannot be a previous date.");
+        // Reset the value to an empty string or handle it as needed
+        setTraindetails({ ...traindetails, [name]: "" });
+        return;
+      }
+    }
+  
+    // For other input fields, update the state normally
     setTraindetails({ ...traindetails, [name]: value });
   };
-
+  
   return (
     <>
       <div className='d-flex'>

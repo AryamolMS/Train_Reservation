@@ -1,20 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom'; // Correct import
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import ContextShare from './context/ContextShare';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    
     <BrowserRouter>
-    <ContextShare>
-    <App />
-    </ContextShare>
+      <ContextShare>
+          <App />
+      </ContextShare>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-

@@ -18,7 +18,7 @@ function Home({ home }) {
           <UserHeader />}
         <div className='homecard Card shadow d-flex  justify-content-center mb-5'>
           <div className="search d-flex align-items-center justify-content-center mb-3 mt-3" style={{ height: "100px", width: "80%" }}>
-            <Link to={'/search'} className="w-25 me-2">
+            <Link to={'/guestsearch'} className="w-25 me-2">
               <select name="" id="" style={{ width: "150px" }}>
                 <option value="">From</option>
                 <option value="">New Delhi</option>
@@ -28,7 +28,7 @@ function Home({ home }) {
               </select>
             </Link>
 
-            <Link to={'/search'} className="w-25 me-2">
+            <Link to={'/guestsearch'} className="w-25 me-2">
               <select name="" id="" style={{ width: "150px" }}>
                 <option value="">To</option>
                 <option value="">Ernakulam</option>
@@ -38,7 +38,7 @@ function Home({ home }) {
               </select>
             </Link>
 
-            <Link to={'/search'}> <input type="date" name="" id="" className="me-4" /></Link>
+            <Link to={'/guestsearch'}> <input type="date" name="" id="" className="me-4" /></Link>
           </div>
 
 

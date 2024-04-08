@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from 'react';
 import './Authentication.css';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -20,39 +19,71 @@ function Authentication({ login }) {
     username: "",
     password: ""
   });
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {};
+
+    // Basic validation checks
+    if (!data.username.trim()) {
+      newErrors.username = "Username is required";
+      valid = false;
+    }
+    if (!data.password.trim()) {
+      newErrors.password = "Password is required";
+      valid = false;
+    }
+
+    // Additional validation for registration form
+    if (!loginForm) {
+      if (!data.name.trim()) {
+        newErrors.name = "Name is required";
+        valid = false;
+      }
+      if (!data.age) {
+        newErrors.age = "Age is required";
+        valid = false;
+      }
+      if (!data.email_address.trim()) {
+        newErrors.email_address = "Email is required";
+        valid = false;
+      }
+      if (!data.biodata) {
+        newErrors.biodata = "Biodata is required";
+        valid = false;
+      }
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   //function to register
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const { name, age, email_address, biodata, username, password } = data;
+    if (!validateForm()) return;
 
-    if (!name || !age || !email_address || !biodata || !username || !password) {
-      Swal.fire({
-        title: "Fill the details completely!",
-        icon: "warning"
-      });
-    } else {
-      const reqBody = new FormData();
+    const reqBody = new FormData();
+    reqBody.append("name", data.name);
+    reqBody.append("age", data.age);
+    reqBody.append("email_address", data.email_address);
+    reqBody.append("biodata", data.biodata);
+    reqBody.append("username", data.username);
+    reqBody.append("password", data.password);
 
-      reqBody.append("name", name);
-      reqBody.append("age", age);
-      reqBody.append("email_address", email_address);
-      reqBody.append("biodata", biodata);
-      reqBody.append("username", username);
-      reqBody.append("password", password);
+    const reqHeader = { "Content-Type": "multipart/form-data" };
 
-      const reqHeader = {
-        "Content-Type": "multipart/form-data"
-      };
-
+    try {
       const result = await registrationapi(reqBody, reqHeader);
       console.log(result);
+
       if (result.status === 200) {
         console.log(result.data);
-        setIsAuthtoken(true)
+        setIsAuthtoken(true);
         Swal.fire({
-          title: "Registred successfully!",
+          title: "Registered successfully!",
           icon: "success"
         });
         setdata({
@@ -64,13 +95,24 @@ function Authentication({ login }) {
           password: ""
         });
         navigate('/login');
+      } else if (result.status === 400 && result.response.data.error === "Username already exists") {
+        Swal.fire({
+          title: "Username already exists!",
+          icon: "error"
+        });
       } else {
         console.log(result.response.data);
         Swal.fire({
-          title: "Something went wrong!",
+          title: "Registration failed!",
           icon: "warning"
         });
       }
+    } catch (error) {
+      console.error("Registration error:", error);
+      Swal.fire({
+        title: "Registration failed!",
+        icon: "error"
+      });
     }
   };
 
@@ -78,20 +120,15 @@ function Authentication({ login }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const { username, password } = data;
+    if (!validateForm()) return;
 
-    if (!username || !password) {
-      Swal.fire({
-        title: "Please fill the form!",
-        icon: "warning"
-      });
-    } else {
+    try {
       const result = await loginaApi(data);
       console.log(result);
 
       if (result.status === 200) {
         Swal.fire({
-          title: "Login Successfull!",
+          title: "Login Successful!",
           icon: "success"
         });
         sessionStorage.setItem("token", result.data.token);
@@ -108,6 +145,12 @@ function Authentication({ login }) {
         });
         console.log(result.response.data);
       }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire({
+        title: "Login failed!",
+        icon: "error"
+      });
     }
   };
 
@@ -133,28 +176,34 @@ function Authentication({ login }) {
                   :
                   <div className='mb-5 mt-5 me-4'>
                     <input value={data.name} onChange={(e) => setdata({ ...data, name: e.target.value })} type="text" placeholder='Enter name' className='form-control w-75' />
+                    {errors.name && <div className="text-danger">{errors.name}</div>}
                   </div>}
 
                 {loginForm ? null
                   : <div className='mb-4 d-flex'>
                     <input value={data.age} onChange={(e) => setdata({ ...data, age: e.target.value })} type="number" name="" id="" placeholder='Enter Age' className='form-control w-50' />
+                    {errors.age && <div className="text-danger">{errors.age}</div>}
                     <input onChange={(e) => setdata({ ...data, biodata: e.target.files[0] })} type="file" name="" id="" className='ms-3' />
+                    {errors.biodata && <div className="text-danger">{errors.biodata}</div>}
                   </div>}
 
                 {loginForm ? null
                   :
                   <div className='mb-5 me-4'>
                     <input value={data.email_address} onChange={(e) => setdata({ ...data, email_address: e.target.value })} type="email" placeholder='Enter email' className='form-control w-75' />
+                    {errors.email_address && <div className="text-danger">{errors.email_address}</div>}
                   </div>}
                 <div className='mb-3 me-4'>
 
                   <div className='mb-5 mt-5 me-4'>
                     <input value={data.username} onChange={(e) => setdata({ ...data, username: e.target.value })} type="text" placeholder='Enter username' className='form-control w-75' />
+                    {errors.username && <div className="text-danger">{errors.username}</div>}
                   </div>
                 </div>
 
                 <div>
                   <input value={data.password} onChange={(e) => setdata({ ...data, password: e.target.value })} type="password" placeholder='Enter password' className='form-control w-75' />
+                  {errors.password && <div className="text-danger">{errors.password}</div>}
                 </div>
 
                 {loginForm ?
@@ -183,4 +232,4 @@ function Authentication({ login }) {
   )
 }
 
-export default Authentication
+export default Authentication;
