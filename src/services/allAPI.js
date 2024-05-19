@@ -137,3 +137,15 @@ export const getTrainStatusAPI = async (reqBody)=>{
 export const getRefundsAPI = async (reqHeader)=>{
    return await commonAPI(`GET`,`${baseurl}/customer/refunds/`,"",reqHeader)
 }
+
+export const getUserbookings = async (reqHeader)=>{
+   return await commonAPI(`GET`,`${baseurl}/station/viewbooking/`,"",reqHeader)
+}
+
+export const getrefundlist = async (reqHeader)=>{
+   return await commonAPI(`GET`,`${baseurl}/station/refunds/`,"",reqHeader)
+}
+
+export const approveRefund = async (id,reqHeader)=>{
+   return await commonAPI(`POST`,`${baseurl}/station/refunds/${id}/refund_approve/`,"",reqHeader)
+}

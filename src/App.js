@@ -23,6 +23,8 @@ import Payment from './User/Bookings/Payment';
 import Refunds from './User/Refunds/Refunds';
 import GuestSearch from './User/Search/GuestSearch';
 import Paynow from './User/Bookings/Paynow';
+import AdminBooking from './Admin/Bookings/AdminBooking';
+import RefundList from './Admin/Bookings/RefundList';
 
 function App() {
   const {isAuthtken,setIsAuthtoken} = useContext(isAuthtokenContext)
@@ -51,6 +53,8 @@ function App() {
         <Route path='/*' element={<Navigate to={'/'} />} />
         <Route path='/guestsearch' element={<GuestSearch/>}/>
         <Route path='/paynow' element={<Paynow/>}/>
+        <Route path='/adminbookings' element={<AdminBooking/>}/>
+        <Route path='/refundlist' element={<RefundList/>}/>
 
       </Routes>
       <Footer/>

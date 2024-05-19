@@ -17,7 +17,7 @@ function StationLogin({register}) {
     })
     console.log(stationdata);
 
-    const stationLogin = async(e)=>{
+   /*  const stationLogin = async(e)=>{
         e.preventDefault()
 
         const {username,password} = stationdata
@@ -49,7 +49,50 @@ function StationLogin({register}) {
                 console.log(result.response.data);
             }
         }
-    }
+    } */
+
+    const stationLogin = async (e) => {
+        e.preventDefault();
+    
+        const { username, password } = stationdata;
+    
+        if (!username || !password) {
+            Swal.fire({
+                title: "Fill the details completely!",
+                icon: "warning",
+            });
+        } else {
+            try {
+                console.log("Sending payload:", { username, password });
+                const result = await stationloginaApi({ username, password });
+                console.log(result);
+    
+                if (result.status === 200) {
+                    Swal.fire({
+                        title: "Login Successful!",
+                        icon: "success",
+                    });
+                    sessionStorage.setItem("token", result.data.token);
+    
+                    navigate('/adminhome');
+                } else {
+                    Swal.fire({
+                        title: "Invalid username or password!",
+                        icon: "error",
+                    });
+                    console.log(result.response.data);
+                }
+            } catch (error) {
+                console.log(error.response.data);
+                Swal.fire({
+                    title: "An error occurred!",
+                    text: error.response.data.non_field_errors || "Please check your input and try again.",
+                    icon: "error",
+                });
+            }
+        }
+    };
+    
   return (
     <>
      <div className="d-flex">
