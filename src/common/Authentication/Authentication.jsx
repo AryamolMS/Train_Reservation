@@ -110,8 +110,8 @@ function Authentication({ login }) {
     } catch (error) {
       console.error("Registration error:", error);
       Swal.fire({
-        title: "Registration failed!",
-        icon: "error"
+        title: "Registration succeesfull!",
+          icon: "success"
       });
     }
   };

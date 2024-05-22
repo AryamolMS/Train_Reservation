@@ -23,6 +23,8 @@ function AdminHeader() {
          <div className='mt-5 text-light'>
             <Link className='link' to={'/addtrain'}><h5 className='mb-3'><i class="fa-solid fa-train-subway me-2"></i> Add Train</h5></Link>
             <Link className='link' to={'/displaytrain'}><h5 className='mb-3'><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Scheduled Train</h5></Link>
+            <Link className='link' to={'/adminbookings'}><h5 className='mb-3'><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> User Bookings</h5></Link>
+            <Link className='link' to={'/refundlist'}><h5 className='mb-3'><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Refund List</h5></Link>
             <h5 className='mb-3'><i class="fa-solid fa-right-from-bracket me-2" onClick={logeout}></i> LogOut</h5>
 
          </div>
